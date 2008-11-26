@@ -2,7 +2,8 @@
 
 /**
  * TestCase class to inherit from to allow Unit Testing based checking of
- * HTML validity.
+ * HTML validity.  Right now, this is only set up to test modules, not full 
+ * pages.  I'll fix this to do anything and everything soon.
  *
  * @author  Neil Crosby <neil@neilcrosby.com>
  * @license Creative Commons Attribution-Share Alike 3.0 Unported 
@@ -45,7 +46,7 @@ $htmlChunk
 </body></html>
 HTML;
 
-        $validator = new HtmlValidator(Config::W3C_SOAP_API);
+        $validator = new TheCodeTrainHtmlValidator(Config::W3C_SOAP_API);
         if ( $validator->isValid($html) ) {
             return false;
         }
