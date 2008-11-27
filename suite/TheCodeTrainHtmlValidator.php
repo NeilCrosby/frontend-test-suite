@@ -19,7 +19,8 @@ class TheCodeTrainHtmlValidator {
 
     public function __construct($validationUrl=null, $exceptions = array()) {
         if ( !$validationUrl ) {
-            return null;
+            throw new Exception('No validation URL given.');
+            return false;
         }
         // TODO validate the validation URL
         $this->validationUrl = $validationUrl;
@@ -64,7 +65,7 @@ class TheCodeTrainHtmlValidator {
 
         if ( !$result ) {
 //            $this->markTestSkipped('Validator did not return anything');
-            return false;
+            return self::NO_VALIDATOR_RESPONSE;
         }
         
         if (strpos( $result, "<m:validity>true</m:validity>" )) {

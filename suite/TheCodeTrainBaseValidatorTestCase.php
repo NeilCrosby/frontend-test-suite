@@ -34,9 +34,6 @@ class TheCodeTrainBaseValidatorTestCase extends PHPUnit_Framework_TestCase {
    
     /* Hmmm, I seem to be missing some code here... */
     protected function getValidationError($htmlChunk) {
-        $this->markTestSkipped('No validator');
-        return "oh noes, no validator existed";
-
 		$html = <<< HTML
 <!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01//EN" "http://www.w3.org/TR/html4/strict.dtd">
 <html>
@@ -46,8 +43,13 @@ $htmlChunk
 </body></html>
 HTML;
 
-        $validator = new TheCodeTrainHtmlValidator(Config::W3C_SOAP_API);
-        if ( $validator->isValid($html) ) {
+        $validator = new TheCodeTrainHtmlValidator('http://blah.com');
+        $isValid = $validator->isValid($html);
+        
+        if ( $validator::NO_VALIDATOR_RESPONSE == $isValid ) {
+            $this->markTestSkipped('No validator');
+            return false;
+        } else if ( $isValid ) {
             return false;
         }
         
