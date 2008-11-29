@@ -77,10 +77,8 @@ class TheCodeTrainBaseExpectedMethodsTestCase extends PHPUnit_Framework_TestCase
         
         if ($handle = opendir($dir)) {
             while (false !== ($file = readdir($handle))) {
-                //echo "$expectedFilename $file\n";
                 if ($file != "." && $file != ".." && $file != $basename ) {
                     if ( $expectedFilename == $file ) {
-                        //echo "It's true!\n";
                         $foundTestCase = true;
                     }
                 }

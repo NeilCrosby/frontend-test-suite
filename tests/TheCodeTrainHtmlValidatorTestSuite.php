@@ -1,7 +1,5 @@
 <?php
 
-//require_once('TheCodeTrainBaseTestSuite.php');
-
 function __autoload($class) {
 	$class = str_replace( '_', '/', $class );
     $aLocations = array('../suite', '.');

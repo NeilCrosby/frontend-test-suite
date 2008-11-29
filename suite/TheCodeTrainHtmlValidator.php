@@ -13,10 +13,6 @@ class TheCodeTrainHtmlValidator {
     const NO_VALIDATOR_RESPONSE = -1;
     const NO_ERROR = false;
     
-    //private var $exceptions;
-    //private var $validationUrl;
-    //private var $lastResult;
-
     public function __construct($validationUrl=null, $exceptions = array()) {
         if ( !$validationUrl ) {
             throw new Exception('No validation URL given.');
@@ -64,7 +60,6 @@ class TheCodeTrainHtmlValidator {
         $this->lastResult = $result;
 
         if ( !$result ) {
-//            $this->markTestSkipped('Validator did not return anything');
             return self::NO_VALIDATOR_RESPONSE;
         }
         
@@ -87,7 +82,6 @@ class TheCodeTrainHtmlValidator {
         
         $result = preg_replace("/(<\/?)(\w+):([^>]*>)/", "$1$2$3", $this->lastResult);
         $result = simplexml_load_string($result);
-        //print_r($result->envBody->mmarkupvalidationresponse->merrors);
 
         if ( 1 == $result->envBody->mmarkupvalidationresponse->merrors->merrorcount ) {
             $error = $result->envBody->mmarkupvalidationresponse->merrors->merrorlist->merror; 
@@ -101,16 +95,6 @@ class TheCodeTrainHtmlValidator {
         }
         
         return $errors;
-        
-        /*
-        preg_match_all( '/\<m:message>(.+)\<\/m:message\>/', $this->lastResult, $matches, PREG_PATTERN_ORDER );
-        
-        foreach ( $matches[1] as $key=>$value) {
-            $matches[1][$key] = html_entity_decode($value);
-        }
-        
-        return $matches[1];
-        */
     }
     
 }
