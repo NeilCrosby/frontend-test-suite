@@ -8,6 +8,17 @@ class TheCodeTrainHtmlValidator_GetErrorsTest extends PHPUnit_Framework_TestCase
     public function tearDown() {
     }
 
+    /**
+     * @dataProvider TheCodeTrainHtmlValidatorTestSuite::invalidValidatorUrlProvider
+     */
+    public function testReturnsNoValidatorResponseWhenBadUrlGiven($input) {
+        $this->obj->isValid('anything');
+        $this->assertEquals(
+            TheCodeTrainHtmlValidator::NO_VALIDATOR_RESPONSE,
+            $this->obj->getErrors()
+        );
+    }
+
     public function testReturnsFalseWhenNoPreviousHtmlChunkTested() {
         $errors = $this->obj->getErrors();
         if ( TheCodeTrainHtmlValidator::NO_VALIDATOR_RESPONSE == $errors ) {

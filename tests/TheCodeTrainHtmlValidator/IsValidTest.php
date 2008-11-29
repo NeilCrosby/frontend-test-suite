@@ -9,6 +9,16 @@ class TheCodeTrainHtmlValidator_IsValidTest extends PHPUnit_Framework_TestCase {
     }
 
     /**
+     * @dataProvider TheCodeTrainHtmlValidatorTestSuite::invalidValidatorUrlProvider
+     */
+    public function testReturnsNoValidatorResponseWhenBadUrlGiven($input) {
+        $this->assertEquals(
+            TheCodeTrainHtmlValidator::NO_VALIDATOR_RESPONSE,
+            $this->obj->isValid('anything')
+        );
+    }
+
+    /**
      * @dataProvider TheCodeTrainHtmlValidatorTestSuite::validHtmlChunkProvider
      */
     public function testReturnsTrueWhenGivenValidHtmlChunk($input) {

@@ -53,6 +53,12 @@ class TheCodeTrainHtmlValidatorTestSuite extends TheCodeTrainBaseTestSuite {
             array('<p>Some text'),
         );
     }
+
+    public static function invalidValidatorUrlProvider() {
+        return array(
+            array('http://thisdefinitelydoesntexist.thecodetrain.co.uk/'),
+        );
+    }
 }
 
 if (PHPUnit_MAIN_METHOD == 'TheCodeTrainHtmlValidatorTestSuite::main') {
