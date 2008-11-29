@@ -18,7 +18,7 @@ class TheCodeTrainHtmlValidator_ConstructTest extends PHPUnit_Framework_TestCase
         );
     }
 
-    public function testDoesNotInstantiateIfNoValidationUrlGiven( ) {
+    public function testExceptionRaisedIfNoValidationUrlGiven( ) {
         $this->setExpectedException('Exception');
         $obj = new TheCodeTrainHtmlValidator();
     }
