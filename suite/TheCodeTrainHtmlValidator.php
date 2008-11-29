@@ -77,7 +77,7 @@ class TheCodeTrainHtmlValidator {
     }
     
     public function getErrors() {
-        if ( !$this->lastResult ) {
+        if ( !isset($this->lastResult) || !$this->lastResult ) {
             return self::NO_VALIDATOR_RESPONSE;
         }
         
