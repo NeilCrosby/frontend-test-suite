@@ -42,6 +42,17 @@ class TheCodeTrainHtmlValidatorTestSuite extends TheCodeTrainBaseTestSuite {
     protected function tearDown() {
     }
 
+    public static function validHtmlChunkProvider() {
+        return array(
+            array('<p>Some text</p>'),
+        );
+    }
+
+    public static function invalidHtmlChunkProvider() {
+        return array(
+            array('<p>Some text'),
+        );
+    }
 }
 
 if (PHPUnit_MAIN_METHOD == 'TheCodeTrainHtmlValidatorTestSuite::main') {
