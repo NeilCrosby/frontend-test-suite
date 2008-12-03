@@ -1,8 +1,9 @@
 <?php
 
 /**
- * Validates HTML.  A work in progress hampered by me not having set up a
- * local copy of the w3c's HTML Validator on my MacBook.
+ * Validates HTML.  Full HTML documents are validated against whatever
+ * doctype they are sent with, whereas HTML chunks are validated against
+ * HTML 4.01 Strict.
  *
  * @author  Neil Crosby <neil@neilcrosby.com>
  * @license Creative Commons Attribution-Share Alike 3.0 Unported 
@@ -52,6 +53,15 @@ class TheCodeTrainHtmlValidator {
         return $result;
     }
     
+    /**
+     * Validates an HTML chunk or full document.
+     *
+     * @param html Some HTML to validate.
+     * @param type Either HTML_DOCUMENT or HTML_CHUNK
+     *
+     * @return boolean, or NO_VALIDATOR_RESPONSE if the chosen validator was
+     *         not able to be reached.
+     **/
     public function isValid($html, $type = self::HTML_DOCUMENT) {
         if ( self::HTML_CHUNK == $type ) {
             $html = <<< HTML
