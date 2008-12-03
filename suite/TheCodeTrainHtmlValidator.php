@@ -12,6 +12,9 @@ class TheCodeTrainHtmlValidator {
     
     const NO_VALIDATOR_RESPONSE = -1;
     const NO_ERROR = false;
+
+    const HTML_DOCUMENT = 5;
+    const HTML_CHUNK    = 10;
     
     public function __construct($validationUrl=null, $exceptions = array()) {
         if ( !$validationUrl ) {
@@ -49,7 +52,18 @@ class TheCodeTrainHtmlValidator {
         return $result;
     }
     
-    public function isValid($html) {
+    public function isValid($html, $type = self::HTML_DOCUMENT) {
+        if ( self::HTML_CHUNK == $type ) {
+            $html = <<< HTML
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01//EN" "http://www.w3.org/TR/html4/strict.dtd">
+<html>
+<head><title>title</title></head>
+<body>
+$html
+</body></html>
+HTML;
+        }
+        
         $html = urlencode($html);
 
         $result = $this->getCurlResponse(
