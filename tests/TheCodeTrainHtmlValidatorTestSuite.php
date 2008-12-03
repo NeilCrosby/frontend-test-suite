@@ -48,7 +48,7 @@ class TheCodeTrainHtmlValidatorTestSuite extends TheCodeTrainBaseTestSuite {
 
     public static function invalidHtmlChunkProvider() {
         return array(
-            array('<p>Some text'),
+            array('<p>Some text</pee>'),
         );
     }
 
