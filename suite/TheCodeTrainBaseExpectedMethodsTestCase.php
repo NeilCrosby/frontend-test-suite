@@ -42,6 +42,9 @@ abstract class TheCodeTrainBaseExpectedMethodsTestCase extends PHPUnit_Framework
         
         $actualMethods = get_class_methods($this->class);
 
+        $parentClass = get_parent_class($this->class);
+        $parentMethods = get_class_methods($parentClass);
+
         foreach ( $expectedMessages as $method ) {
             $this->assertTrue( 
                 in_array( $method, $actualMethods ), 
@@ -50,13 +53,24 @@ abstract class TheCodeTrainBaseExpectedMethodsTestCase extends PHPUnit_Framework
         }
 
         foreach ( $actualMethods as $method ) {
+            
+            // if this class has inherited this method from its parent
+            // then we can ignore it.
+            // Flawed logic? What if this class overrides the functionality
+            // of its parent?
+            // Can we assume that people will actually write tests for 
+            // methods they override?  Probably not.
+            if ( in_array( $method, $parentMethods ) ) {
+                continue;
+            }
+            
             $this->assertTrue( 
                 in_array( $method, $expectedMessages ), 
                 $this->class."->$method() exists publicly, but should not" 
             );
         }
 
-        $this->assertEquals( sizeof($expectedMessages), sizeof($actualMethods) );
+        $this->assertGreaterThanOrEqual( sizeof($actualMethods) - sizeof($parentMethods), sizeof($expectedMessages) );
     }
     
     /**

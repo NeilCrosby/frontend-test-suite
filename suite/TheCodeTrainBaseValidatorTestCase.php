@@ -10,6 +10,9 @@
  *          http://creativecommons.org/licenses/by-sa/3.0/
  **/
 abstract class TheCodeTrainBaseValidatorTestCase extends PHPUnit_Framework_TestCase {
+    
+    private $validatorUrl = 'http://htmlvalidator/check';
+    
     protected function getCurlResponse( $url, $aOptions = array() ) {
 
         $session = curl_init();
@@ -31,22 +34,29 @@ abstract class TheCodeTrainBaseValidatorTestCase extends PHPUnit_Framework_TestC
         
         return $result;
     }
+    
+    public function setValidatorUrl($url) {
+        $this->validatorUrl = $url;
+    }
    
     /* Hmmm, I seem to be missing some code here... */
-    protected function getValidationError($htmlChunk) {
-		$html = <<< HTML
+    public function getValidationError($html, $type = null) {
+        $validator = new TheCodeTrainHtmlValidator($this->validatorUrl);
+
+        if ( $validator->HTML_CHUNK == $type ) {
+            $html = <<< HTML
 <!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01//EN" "http://www.w3.org/TR/html4/strict.dtd">
 <html>
 <head><title>title</title></head>
 <body>
-$htmlChunk
+$html
 </body></html>
 HTML;
+        }
 
-        $validator = new TheCodeTrainHtmlValidator('http://blah.com');
         $isValid = $validator->isValid($html);
         
-        if ( $validator::NO_VALIDATOR_RESPONSE == $isValid ) {
+        if ( $validator->NO_VALIDATOR_RESPONSE == $isValid ) {
             $this->markTestSkipped('No validator');
             return false;
         } else if ( $isValid ) {
