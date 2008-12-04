@@ -31,7 +31,7 @@
  *     }
  *     
  **/
-class TheCodeTrainBaseExpectedMethodsTestCase extends PHPUnit_Framework_TestCase
+abstract class TheCodeTrainBaseExpectedMethodsTestCase extends PHPUnit_Framework_TestCase
 {
     public function testPublicApiOnlyContainsExpectedMethods() {
         $tempExpectedMessages = $this->expectedMethodsProvider();

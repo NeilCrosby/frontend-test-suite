@@ -9,7 +9,7 @@
  * @license Creative Commons Attribution-Share Alike 3.0 Unported 
  *          http://creativecommons.org/licenses/by-sa/3.0/
  **/
-class TheCodeTrainBaseValidatorTestCase extends PHPUnit_Framework_TestCase {
+abstract class TheCodeTrainBaseValidatorTestCase extends PHPUnit_Framework_TestCase {
     protected function getCurlResponse( $url, $aOptions = array() ) {
 
         $session = curl_init();

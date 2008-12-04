@@ -33,7 +33,7 @@
  *     }
  *     
  **/
-class TheCodeTrainBaseTestSuite extends PHPUnit_Framework_TestSuite {
+abstract class TheCodeTrainBaseTestSuite extends PHPUnit_Framework_TestSuite {
     public static function main() {
         PHPUnit_TextUI_TestRunner::run(self::suite());
     }
