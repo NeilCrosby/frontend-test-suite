@@ -17,18 +17,13 @@ class TheCodeTrainHtmlValidator {
     const HTML_DOCUMENT = 5;
     const HTML_CHUNK    = 10;
     
-    public function __construct($validationUrl=null, $exceptions = array()) {
+    public function __construct($validationUrl=null) {
         if ( !$validationUrl ) {
             throw new Exception('No validation URL given.');
             return false;
         }
         // TODO validate the validation URL
         $this->validationUrl = $validationUrl;
-
-        if ( !is_array($exceptions) ) {
-            $exceptions = array($exceptions);
-        }
-        $this->exceptions = $exceptions;
     }
     
     protected function getCurlResponse( $url, $aOptions = array() ) {
