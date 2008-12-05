@@ -9,7 +9,7 @@ class TheCodeTrainHtmlValidator_GetErrorsTest extends PHPUnit_Framework_TestCase
     }
 
     /**
-     * @dataProvider TheCodeTrainHtmlValidatorTestSuite::invalidValidatorUrlProvider
+     * @dataProvider TheCodeTrainHtmlValidatorProviders::invalidValidatorUrlProvider
      */
     public function testReturnsNoValidatorResponseWhenBadUrlGiven($input) {
         $validator = new TheCodeTrainHtmlValidator($input);
@@ -28,7 +28,7 @@ class TheCodeTrainHtmlValidator_GetErrorsTest extends PHPUnit_Framework_TestCase
     }
 
     /**
-     * @dataProvider TheCodeTrainHtmlValidatorTestSuite::validHtmlChunkProvider
+     * @dataProvider TheCodeTrainHtmlValidatorProviders::validHtmlChunkProvider
      */
     public function testReturnsFalseWhenValidHtmlChunkTested($input) {
         $isValid = $this->obj->isValid($input, TheCodeTrainHtmlValidator::HTML_CHUNK);
@@ -40,7 +40,7 @@ class TheCodeTrainHtmlValidator_GetErrorsTest extends PHPUnit_Framework_TestCase
     }
 
     /**
-     * @dataProvider TheCodeTrainHtmlValidatorTestSuite::invalidHtmlChunkProvider
+     * @dataProvider TheCodeTrainHtmlValidatorProviders::invalidHtmlChunkProvider
      */
     public function testReturnsArrayWhenInvalidHtmlChunkTested($input) {
         $isValid = $this->obj->isValid($input, TheCodeTrainHtmlValidator::HTML_CHUNK);
@@ -52,7 +52,7 @@ class TheCodeTrainHtmlValidator_GetErrorsTest extends PHPUnit_Framework_TestCase
     }
 
     /**
-     * @dataProvider TheCodeTrainHtmlValidatorTestSuite::validHtmlChunkProvider
+     * @dataProvider TheCodeTrainHtmlValidatorProviders::validHtmlChunkProvider
      */
     public function testReturnsFalseWhenValidHtmlDocumentTested($input) {
         $html = <<< HTML
@@ -72,7 +72,7 @@ HTML;
     }
 
     /**
-     * @dataProvider TheCodeTrainHtmlValidatorTestSuite::invalidHtmlChunkProvider
+     * @dataProvider TheCodeTrainHtmlValidatorProviders::invalidHtmlChunkProvider
      */
     public function testReturnsArrayWhenInvalidHtmlDocumentTested($input) {
         $html = <<< HTML
