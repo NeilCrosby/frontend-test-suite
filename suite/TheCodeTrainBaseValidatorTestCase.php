@@ -43,7 +43,7 @@ abstract class TheCodeTrainBaseValidatorTestCase extends PHPUnit_Framework_TestC
     public function getValidationError($html, $type = null) {
         $validator = new TheCodeTrainHtmlValidator($this->validatorUrl);
 
-        if ( $validator->HTML_CHUNK == $type ) {
+        if ( TheCodeTrainHtmlValidator::HTML_CHUNK == $type ) {
             $html = <<< HTML
 <!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01//EN" "http://www.w3.org/TR/html4/strict.dtd">
 <html>
@@ -56,7 +56,7 @@ HTML;
 
         $isValid = $validator->isValid($html);
         
-        if ( $validator->NO_VALIDATOR_RESPONSE == $isValid ) {
+        if ( TheCodeTrainHtmlValidator::NO_VALIDATOR_RESPONSE === $isValid ) {
             $this->markTestSkipped('No validator');
             return false;
         } else if ( $isValid ) {
