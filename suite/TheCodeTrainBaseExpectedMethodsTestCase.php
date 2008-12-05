@@ -43,7 +43,8 @@ abstract class TheCodeTrainBaseExpectedMethodsTestCase extends PHPUnit_Framework
         $actualMethods = get_class_methods($this->class);
 
         $parentClass = get_parent_class($this->class);
-        $parentMethods = get_class_methods($parentClass);
+        
+        $parentMethods = ($parentClass) ? get_class_methods($parentClass) : array();
 
         foreach ( $expectedMessages as $method ) {
             $this->assertTrue( 
