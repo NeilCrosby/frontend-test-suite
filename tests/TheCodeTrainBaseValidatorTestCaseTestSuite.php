@@ -20,6 +20,11 @@ if ( !function_exists('__autoload') ) {
     }
 }
 
+/**
+ * @author  Neil Crosby <neil@neilcrosby.com>
+ * @license Creative Commons Attribution-Share Alike 3.0 Unported 
+ *          http://creativecommons.org/licenses/by-sa/3.0/
+ **/
 class TheCodeTrainBaseValidatorTestCaseTestSuite extends TheCodeTrainBaseTestSuite {
     public static function main() {
         PHPUnit_TextUI_TestRunner::run(self::suite());
