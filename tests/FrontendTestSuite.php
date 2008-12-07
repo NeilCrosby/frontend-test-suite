@@ -21,6 +21,13 @@ if ( !function_exists('__autoload') ) {
 }
 
 /**
+ * The TestSuite used to run all the other TestSuites that test the Tests
+ * contained within the Frontend Test Suite.  Is everyone thouroughly confused
+ * now?
+ *
+ * This class runs all the tests that make sure the Frontend Test Suite does
+ * what it's supposed to.
+ *
  * @author  Neil Crosby <neil@neilcrosby.com>
  * @license Creative Commons Attribution-Share Alike 3.0 Unported 
  *          http://creativecommons.org/licenses/by-sa/3.0/
