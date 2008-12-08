@@ -14,8 +14,17 @@ class TheCodeTrainBaseValidatorTestCase_GetValidationErrorTest extends PHPUnit_F
     public function tearDown() {
     }
 
-    public function testSkipsTestWhenBadUrlGiven() {
-        $this->markTestIncomplete();
+    /**
+     * TODO look at why this still gets marks as skipped - the external test 
+     * shouldn't be
+     * @dataProvider TheCodeTrainHtmlValidatorProviders::invalidValidatorUrlProvider
+     **/
+    public function testSkipsTestWhenBadUrlGiven($input) {
+        $this->setExpectedException('PHPUnit_Framework_SkippedTestError');
+
+        $this->obj = new ConcreteValidatorTestCase();
+        $this->obj->setValidatorUrl($input);
+        $this->obj->getValidationError('<p>whatever</pee>', TheCodeTrainHtmlValidator::HTML_CHUNK);
     }
 
     /**
