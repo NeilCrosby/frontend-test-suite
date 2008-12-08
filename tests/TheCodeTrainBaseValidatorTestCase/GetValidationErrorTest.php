@@ -15,16 +15,25 @@ class TheCodeTrainBaseValidatorTestCase_GetValidationErrorTest extends PHPUnit_F
     }
 
     /**
-     * TODO look at why this still gets marks as skipped - the external test 
-     * shouldn't be
      * @dataProvider TheCodeTrainHtmlValidatorProviders::invalidValidatorUrlProvider
      **/
     public function testSkipsTestWhenBadUrlGiven($input) {
-        $this->setExpectedException('PHPUnit_Framework_SkippedTestError');
-
         $this->obj = new ConcreteValidatorTestCase();
         $this->obj->setValidatorUrl($input);
-        $this->obj->getValidationError('<p>whatever</pee>', TheCodeTrainHtmlValidator::HTML_CHUNK);
+        try {
+            $this->obj->getValidationError('<p>whatever</pee>', TheCodeTrainHtmlValidator::HTML_CHUNK);
+        } catch (PHPUnit_Framework_SkippedTestError $e) {
+            // If this gets fired, the test has passed. Therefore, return!
+            // This is fired because when a test is marked as skipped a
+            // PHPUnit_Framework_SkippedTestError error is fired.  We can't
+            // test for this the normal way, with a setExpectedException,
+            // because doing that still results in the inner test being shown
+            // as having been skipped when we run this test.
+            return;
+        }
+        
+        // Therefore, if we get to here, the test has failed.
+        $this->fail();
     }
 
     /**
