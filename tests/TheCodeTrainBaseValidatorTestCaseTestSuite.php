@@ -35,7 +35,7 @@ class TheCodeTrainBaseValidatorTestCaseTestSuite extends TheCodeTrainBaseTestSui
 
         $suite = new TheCodeTrainBaseValidatorTestCaseTestSuite();
         foreach ( $tests as $test ) {
-			$suite->addTestSuite($test);
+            $suite->addTestSuite($test);
         }
 
         return $suite;
