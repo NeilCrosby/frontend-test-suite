@@ -38,14 +38,46 @@ class FrontendTestSuite extends PHPUnit_Framework_TestSuite {
     }
  
     public static function suite() {
-        // TODO do something similar to TheCodeTrainBaseTestSuite to
-        // automagically find other TestSuites in this directory and add them.
+        $suites = self::getTestSuites(__FILE__);
+
         $suite = new FrontendTestSuite();
-        $suite->addTestSuite('TheCodeTrainBaseValidatorTestCaseTestSuite');
-        $suite->addTestSuite('TheCodeTrainHtmlValidatorTestSuite');
+        foreach ( $suites as $item ) {
+            $suite->addTestSuite($item);
+        }
+
         return $suite;
     }
  
+    /**
+     * Finds all TestSuites in this directory.
+     *
+     * @param $baseFile the full file path of the calling class
+     *
+     * @return An array containing the classnames of the associated TestSuites
+     **/
+    public static function getTestSuites( $baseFile ) {
+        $return = array();
+        
+        $pathParts = pathinfo($baseFile);
+        $dir = $pathParts['dirname'];
+        $base = $pathParts['basename'];
+        $class = $pathParts['filename'];
+        
+        $includeDir = $dir;
+        
+        if ($handle = opendir("$dir")) {
+            while (false !== ($file = readdir($handle))) {
+                if ($file != "." && $file != ".." && $file != $base) {
+                    if ( 'TestSuite.php' == substr($file, -strlen('TestSuite.php')) ) {
+                        array_push($return, substr($file, 0, -strlen('.php')));
+                    }
+                }
+            }
+            closedir($handle);
+        }
+        
+        return $return;
+    }
     protected function setUp() {
     }
  
