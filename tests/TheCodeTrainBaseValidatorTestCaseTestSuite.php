@@ -48,6 +48,10 @@ class TheCodeTrainBaseValidatorTestCaseTestSuite extends TheCodeTrainBaseTestSui
     }
 }
 
+class ConcreteValidatorTestCase extends TheCodeTrainBaseValidatorTestCase {
+
+}
+
 if (PHPUnit_MAIN_METHOD == 'TheCodeTrainBaseValidatorTestCaseTestSuite::main') {
      TheCodeTrainHtmlValidatorTestSuite::main();
 }

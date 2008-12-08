@@ -19,6 +19,12 @@ class TheCodeTrainHtmlValidatorProviders {
         );
     }
 
+    public static function validValidatorUrlProvider() {
+        return array(
+            array('http://htmlvalidator/check'),
+        );
+    }
+    
     public static function invalidValidatorUrlProvider() {
         return array(
             array('http://thisdefinitelydoesntexist.thecodetrain.co.uk/'),

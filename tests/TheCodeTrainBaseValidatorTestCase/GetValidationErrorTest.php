@@ -84,8 +84,4 @@ HTML;
         $this->assertType('string', $errors);
     }
 }
-
-class ConcreteValidatorTestCase extends TheCodeTrainBaseValidatorTestCase {
-    
-}
 ?>
