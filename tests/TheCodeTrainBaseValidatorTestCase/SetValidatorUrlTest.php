@@ -12,8 +12,27 @@ class TheCodeTrainBaseValidatorTestCase_SetValidatorUrlTest extends PHPUnit_Fram
     public function tearDown() {
     }
 
-    public function testSomething() {
+    public function testNotSettingResultsInFailedTest() {
+        $this->markTestIncomplete();
+    }
+
+    /**
+     * @dataProvider TheCodeTrainHtmlValidatorProviders::invalidValidatorUrlProvider
+     **/
+    public function testSettingToBadUrlResultsInSkippedTest() {
+        $this->markTestIncomplete();
+    }
+
+    /**
+     * @dataProvider TheCodeTrainHtmlValidatorProviders::validValidatorUrlProvider
+     **/
+    public function testSettingToGoodUrlResultsInSkippedTest() {
         $this->markTestIncomplete();
     }
 }
+
+class ConcreteValidatorTestCase extends TheCodeTrainBaseValidatorTestCase {
+    
+}
+
 ?>
