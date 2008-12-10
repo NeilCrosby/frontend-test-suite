@@ -36,7 +36,6 @@ HTML;
         
         if ( TheCodeTrainHtmlValidator::NO_VALIDATOR_RESPONSE === $isValid ) {
             $this->markTestSkipped('No validator');
-            return false;
         } else if ( $isValid ) {
             return false;
         }
