@@ -13,28 +13,6 @@ abstract class TheCodeTrainBaseValidatorTestCase extends PHPUnit_Framework_TestC
     
     private $validatorUrl = 'http://htmlvalidator/check';
     
-    protected function getCurlResponse( $url, $aOptions = array() ) {
-
-        $session = curl_init();
-        curl_setopt( $session, CURLOPT_URL, $url );
-        
-        $showHeader = ( isset($aOptions['headers']) && $aOptions['headers'] ) ? true : false;
-        
-        curl_setopt( $session, CURLOPT_HEADER, $showHeader );
-        curl_setopt( $session, CURLOPT_RETURNTRANSFER, 1 );
-        
-        if ( isset($aOptions['post']) ) {
-            curl_setopt( $session, CURLOPT_POST, 1 );
-            curl_setopt( $session, CURLOPT_POSTFIELDS, $aOptions['post'] );
-        }
-
-        $result = curl_exec( $session );
-
-        curl_close( $session );
-        
-        return $result;
-    }
-    
     public function setValidatorUrl($url) {
         $this->validatorUrl = $url;
     }
