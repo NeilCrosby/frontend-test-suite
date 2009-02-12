@@ -15,8 +15,16 @@ By automatically and continuously running a suite of frontend tests a greater le
    * Javascript linting
    * Documentation to make it easy for others to use
    
-### Phase 2
+## Phase 2
 
    * "Whitelisting" sections of known bad code - eg external adverts pulled into a page.
    * HTML well-formedness testing.  Whitelisted sections of code should still be well formed.
    * Basic accessibility rules checking.
+
+## Tools required
+
+Given the number of tests that will generally be being run per hour, it would be rude to rely on free external services that others provide.  Instead, you should install your own local versions of these services so as not to put unnecessary strain on the public versions.
+
+   * HTML Validator
+   * CSS Validator
+   * JSLint
