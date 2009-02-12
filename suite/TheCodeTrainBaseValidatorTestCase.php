@@ -16,7 +16,6 @@ abstract class TheCodeTrainBaseValidatorTestCase extends PHPUnit_Framework_TestC
         $this->validatorUrl = $url;
     }
    
-    /* Hmmm, I seem to be missing some code here... */
     public function getValidationError($html, $type = null) {
         $validator = new TheCodeTrainHtmlValidator($this->validatorUrl);
 
