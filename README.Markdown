@@ -1,5 +1,22 @@
 # Frontend Test Suite
 
-This repository will contain my suite of classes and gubbins for allowing automated testing of frontends.  The test suite will initially cover HTML validity, CSS validity and JSLinting for "good" code.  Later the suite will allow you to do more interesting things.
+Automated testing of Frontend Web Systems is a task that's rarely implemented, and when it is it's generally a just case of "Lets write some Selenium tests" and that will be the end of things.
 
-The HtmlValidator class now works, and will validate both chunks of HTML and full HTML documents, which is nice.
+I believe that starting to test Frontend Web Systems using the JavaScript layer within the browser is starting too far down the chain.  As developers we will all sporadically test for HTML and CSS validity, we will look for errors cropping up in our JavaScript, and we'll try and make sure that our pages contain no XSS holes.
+
+The problem with this is that this testing only tends to happen when we remember about it.  Easy bugs to fix can go unnoticed for months, and others can appear which take hours to fix purely because we do not notice that a span tag has been left unclosed.
+
+By automatically and continuously running a suite of frontend tests a greater level of confidence in the quality of code can be attained.  By notifying developers of issues with their commited code fixes can be pushed within minutes, rather than hours.  By running the tests as pre-commit hooks, bad code can be stopped from even being allowed into the system.
+
+## Phase 1
+
+   * HTML Validation - both page and module level (Complete)
+   * CSS Validation
+   * Javascript linting
+   * Documentation to make it easy for others to use
+   
+### Phase 2
+
+   * "Whitelisting" sections of known bad code - eg external adverts pulled into a page.
+   * HTML well-formedness testing.  Whitelisted sections of code should still be well formed.
+   * Basic accessibility rules checking.
