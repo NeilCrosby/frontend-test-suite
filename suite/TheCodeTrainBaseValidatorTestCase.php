@@ -16,11 +16,23 @@ abstract class TheCodeTrainBaseValidatorTestCase extends PHPUnit_Framework_TestC
         $this->validatorUrl = $url;
     }
    
-    public function getValidationError($html, $type = null) {
+    public function getValidationError($html, $type = null, $position = TheCodeTrainHtmlValidator::POSITION_BODY) {
         $validator = new TheCodeTrainHtmlValidator($this->validatorUrl);
 
         if ( TheCodeTrainHtmlValidator::HTML_CHUNK == $type ) {
-            $html = <<< HTML
+            if ( TheCodeTrainHtmlValidator::POSITION_HEAD == $position ) {
+                $html = <<< HTML
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01//EN" "http://www.w3.org/TR/html4/strict.dtd">
+<html>
+<head>
+$html
+</head>
+<body>
+<p>Empty body</p>
+</body></html>
+HTML;
+            } else {
+                $html = <<< HTML
 <!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01//EN" "http://www.w3.org/TR/html4/strict.dtd">
 <html>
 <head><title>title</title></head>
@@ -28,6 +40,7 @@ abstract class TheCodeTrainBaseValidatorTestCase extends PHPUnit_Framework_TestC
 $html
 </body></html>
 HTML;
+            }
         }
 
         $isValid = $validator->isValid($html);

@@ -17,6 +17,9 @@ class TheCodeTrainHtmlValidator {
     const HTML_DOCUMENT = 5;
     const HTML_CHUNK    = 10;
     
+    const POSITION_BODY = 0;
+    const POSITION_HEAD = 1;
+    
     public function __construct($validationUrl=null) {
         if ( !$validationUrl ) {
             throw new Exception('No validation URL given.');
