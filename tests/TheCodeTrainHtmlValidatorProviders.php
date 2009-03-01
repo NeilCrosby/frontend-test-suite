@@ -13,10 +13,29 @@ class TheCodeTrainHtmlValidatorProviders {
         );
     }
 
+    public static function validHtmlChunkWithPositionProvider() {
+        return array(
+            array(array('<p>Some text</p>', TheCodeTrainHtmlValidator::POSITION_BODY)),
+            array(array('<title>Some Title</title>', TheCodeTrainHtmlValidator::POSITION_HEAD)),
+        );
+    }
+
     public static function invalidHtmlChunkProvider() {
         return array(
             array('<p>Some text</pee>'),
             array('<p>Two errors in this<img src="whee.png"></pee>'),
+            array("<title>This can't go in the body</title>"),
+        );
+    }
+
+    public static function invalidHtmlChunkWithPositionProvider() {
+        return array(
+            array(array('<p>Some text</pee>', TheCodeTrainHtmlValidator::POSITION_BODY)),
+            array(array('<p>Two errors in this<img src="whee.png"></pee>', TheCodeTrainHtmlValidator::POSITION_BODY)),
+            array(array("<title>This can't go in the body</title>", TheCodeTrainHtmlValidator::POSITION_BODY)),
+            array(array("<p>This can't go in the head</p>", TheCodeTrainHtmlValidator::POSITION_HEAD)),
+            array(array('<p>Some text</pee>', TheCodeTrainHtmlValidator::POSITION_HEAD)),
+            array(array('<p>Two errors in this<img src="whee.png"></pee>', TheCodeTrainHtmlValidator::POSITION_HEAD)),
         );
     }
 
