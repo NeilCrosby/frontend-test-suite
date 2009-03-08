@@ -85,8 +85,7 @@ class FrontendTestSuite extends PHPUnit_Framework_TestSuite {
     }
 }
 
-
 if (PHPUnit_MAIN_METHOD == 'FrontendTestSuite::main') {
-     TTWRTestSuite::main();
+     FrontendTestSuite::main();
 }
 ?>
