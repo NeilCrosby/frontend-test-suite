@@ -21,6 +21,7 @@ class TheCodeTrainCssValidatorProviders {
             array('<p>Some text</pee>'),
             array('itvehrb jgskhg; fstoiaeoyufsfgoi'),
             array("p { bllllllllah;"),
+            array("p { display: blah;}"),
         );
     }
 
