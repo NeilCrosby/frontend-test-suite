@@ -25,7 +25,7 @@ if ( !function_exists('__autoload') ) {
  * @license Creative Commons Attribution-Share Alike 3.0 Unported 
  *          http://creativecommons.org/licenses/by-sa/3.0/
  **/
-class TheCodeTrainBaseValidatorTestCaseTestSuite extends TheCodeTrainBaseTestSuite {
+class TheCodeTrainHtmlValidatorTestCaseTestSuite extends TheCodeTrainBaseTestSuite {
     public static function main() {
         PHPUnit_TextUI_TestRunner::run(self::suite());
     }
@@ -33,7 +33,7 @@ class TheCodeTrainBaseValidatorTestCaseTestSuite extends TheCodeTrainBaseTestSui
     public static function suite() {
         $tests = self::getTests(__FILE__);
 
-        $suite = new TheCodeTrainBaseValidatorTestCaseTestSuite();
+        $suite = new TheCodeTrainHtmlValidatorTestCaseTestSuite();
         foreach ( $tests as $test ) {
             $suite->addTestSuite($test);
         }
@@ -48,11 +48,11 @@ class TheCodeTrainBaseValidatorTestCaseTestSuite extends TheCodeTrainBaseTestSui
     }
 }
 
-class ConcreteValidatorTestCase extends TheCodeTrainBaseValidatorTestCase {
+class ConcreteValidatorTestCase extends TheCodeTrainHtmlValidatorTestCase {
 
 }
 
-if (PHPUnit_MAIN_METHOD == 'TheCodeTrainBaseValidatorTestCaseTestSuite::main') {
+if (PHPUnit_MAIN_METHOD == 'TheCodeTrainHtmlValidatorTestCaseTestSuite::main') {
      TheCodeTrainHtmlValidatorTestSuite::main();
 }
 ?>
