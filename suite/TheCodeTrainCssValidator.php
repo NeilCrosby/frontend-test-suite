@@ -11,6 +11,8 @@ class TheCodeTrainCssValidator {
     
     const NO_VALIDATOR_RESPONSE = -1;
     const NO_ERROR = false;
+    const ALLOW = 1;
+    const DISALLOW = 0;
 
     public function __construct($validationUrl=null) {
         if ( !$validationUrl ) {
@@ -22,7 +24,6 @@ class TheCodeTrainCssValidator {
     }
     
     protected function getCurlResponse( $url, $aOptions = array() ) {
-
         $session = curl_init();
         curl_setopt( $session, CURLOPT_URL, $url );
         
@@ -45,6 +46,10 @@ class TheCodeTrainCssValidator {
 
     }
     
+    protected function commentOutCss($css, $regex) {
+        return preg_replace($regex, '/* $1 */', $css);
+    }
+    
     /**
      * Validates a CSS document.
      *
@@ -53,7 +58,21 @@ class TheCodeTrainCssValidator {
      * @return boolean, or NO_VALIDATOR_RESPONSE if the chosen validator was
      *         not able to be reached.
      **/
-    public function isValid($css) {
+    public function isValid($css, $aOptions = array()) {
+        if ( isset($aOptions['exceptions']) && is_array($aOptions['exceptions']) ) {
+
+            $e = $aOptions['exceptions'];
+
+            if ( isset($e['star_prop']) && self::ALLOW === $e['star_prop'] ) {
+                $css = $this->commentOutCss($css, '/([*][-a-zA-Z0-9]+:[^;}]*;?)/');
+            }
+            
+            if ( isset($e['underscore_prop']) && self::ALLOW === $e['underscore_prop'] ) {
+                $css = $this->commentOutCss($css, '/([_][-a-zA-Z0-9]+:[^;}]*;?)/');
+            }
+            
+        }
+        
         $result = $this->getCurlResponse(
             $this->validationUrl,
             array('post'=>array("text"=>$css,"output"=>"soap12"))

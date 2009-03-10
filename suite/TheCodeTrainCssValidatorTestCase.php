@@ -18,7 +18,7 @@ abstract class TheCodeTrainCssValidatorTestCase extends PHPUnit_Framework_TestCa
    
     public function getValidationError($css, $options = array()) {
         $validator = new TheCodeTrainCssValidator($this->validatorUrl);
-        $isValid = $validator->isValid($css);
+        $isValid = $validator->isValid($css, $options);
         
         if ( TheCodeTrainCssValidator::NO_VALIDATOR_RESPONSE === $isValid ) {
             $this->markTestSkipped('No validator');

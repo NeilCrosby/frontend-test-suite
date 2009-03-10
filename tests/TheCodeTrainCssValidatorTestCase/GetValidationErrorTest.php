@@ -51,5 +51,21 @@ class TheCodeTrainCssValidatorTestCase_GetValidationErrorTest extends PHPUnit_Fr
         $errors = $this->obj->getValidationError($input);
         $this->assertType('string', $errors);
     }
+
+    /**
+     * @dataProvider TheCodeTrainCssValidatorProviders::validCssWithExceptionsProvider
+     */
+    public function testReturnsFalseWhenValidCssWithExceptionsTested($input) {
+        $errors = $this->obj->getValidationError($input[0], array('exceptions'=>$input[1]));
+        $this->assertFalse($errors);
+    }
+
+    /**
+     * @dataProvider TheCodeTrainCssValidatorProviders::invalidCssWithExceptionsProvider
+     */
+    public function testReturnsStringWhenInvalidCssWithExceptionsTested($input) {
+        $errors = $this->obj->getValidationError($input[0], array('exceptions'=>$input[1]));
+        $this->assertType('string', $errors);
+    }
 }
 ?>
