@@ -24,6 +24,7 @@ class TheCodeTrainCssValidatorProviders {
             array("p { display: blah;}"),
             array("p { *display: blah;}"),
             array("#bd,.yui-g,.yui-gb,.yui-gc,.yui-gd,.yui-ge,.yui-gf{zoom:1;}"),
+            array("#hd,#bd,#ft,.yui-g,.yui-gb,.yui-gc,.yui-gd,.yui-ge,.yui-gf{zoom:1;}"),
             array("table{font-size:inherit;font:100%;}"),
         );
     }
@@ -34,7 +35,8 @@ class TheCodeTrainCssValidatorProviders {
             array(array('p {*display: inline;display: block;}', array('star_prop'=>TheCodeTrainCssValidator::ALLOW))),
             array(array('p { display: block; _display: inline}', array('underscore_prop'=>TheCodeTrainCssValidator::ALLOW))),
             array(array('p {_display: inline;display: block }', array('underscore_prop'=>TheCodeTrainCssValidator::ALLOW))),
-            array(array("#bd,.yui-g,.yui-gb,.yui-gc,.yui-gd,.yui-ge,.yui-gf{zoom:1;}", array('yui_hacks'=>TheCodeTrainCssValidator::ALLOW))),
+            array(array("p{display:block;}#bd,.yui-g,.yui-gb,.yui-gc,.yui-gd,.yui-ge,.yui-gf{zoom:1;}li{display:block;}", array('yui_hacks'=>TheCodeTrainCssValidator::ALLOW))),
+            array(array("p{display:block;}#hd,#bd,#ft,.yui-g,.yui-gb,.yui-gc,.yui-gd,.yui-ge,.yui-gf{zoom:1;}li{display:block;}", array('yui_hacks'=>TheCodeTrainCssValidator::ALLOW))),
             array(array("table{font-size:inherit;font:100%;}", array('yui_hacks'=>TheCodeTrainCssValidator::ALLOW))),
         );
     }
