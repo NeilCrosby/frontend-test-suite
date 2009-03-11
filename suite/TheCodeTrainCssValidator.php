@@ -73,7 +73,10 @@ class TheCodeTrainCssValidator {
             
             if ( isset($e['yui_hacks']) && self::ALLOW === $e['yui_hacks'] ) {
                 $css = $this->commentOutCss($css, '/(font:100%;)/');
+                // 2.6.x
                 $css = $this->commentOutCss($css, '/(#bd,.yui-g,.yui-gb,.yui-gc,.yui-gd,.yui-ge,.yui-gf{zoom:1;})/');
+                // 2.7.0
+                $css = $this->commentOutCss($css, '/(#hd,#bd,#ft,.yui-g,.yui-gb,.yui-gc,.yui-gd,.yui-ge,.yui-gf{zoom:1;})/');            
             }
             
         }
