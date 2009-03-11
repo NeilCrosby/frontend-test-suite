@@ -10,10 +10,16 @@ By automatically and continuously running a suite of frontend tests a greater le
 
 ## Phase 1
 
-   * HTML Validation - both page and module level (Complete)
+   * HTML Validation
+       * Page level (Complete)
+       * Module level (Complete)
+       * Ability to validate using a different doctype to the one given on the page to allow for well documented exceptions.
    * CSS Validation
+       * Ability to allow through certain known hacks.
+       * Ability to allow the YUI's CSS to pass, even after allowing for those known hacks.
    * Javascript linting
-   * Documentation to make it easy for others to use
+       * Ability to pass through a known configuration for linting against.
+   * Documentation to make it easy for others to use the framework.
    
 ## Phase 2
 
