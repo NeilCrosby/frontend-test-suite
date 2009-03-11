@@ -71,6 +71,11 @@ class TheCodeTrainCssValidator {
                 $css = $this->commentOutCss($css, '/([_][-a-zA-Z0-9]+:[^;}]*;?)/');
             }
             
+            if ( isset($e['yui_hacks']) && self::ALLOW === $e['yui_hacks'] ) {
+                $css = $this->commentOutCss($css, '/(font:100%;)/');
+                $css = $this->commentOutCss($css, '/(#bd,.yui-g,.yui-gb,.yui-gc,.yui-gd,.yui-ge,.yui-gf{zoom:1;})/');
+            }
+            
         }
         
         $result = $this->getCurlResponse(
