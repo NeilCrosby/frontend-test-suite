@@ -14,6 +14,8 @@ class TheCodeTrainCssValidator {
     const ALLOW = 1;
     const DISALLOW = 0;
 
+    const FILE_IDENTIFIER = 'file://';
+    
     public function __construct($validationUrl=null) {
         if ( !$validationUrl ) {
             throw new Exception('No validation URL given.');
@@ -79,6 +81,12 @@ class TheCodeTrainCssValidator {
      *         not able to be reached.
      **/
     public function isValid($css, $aOptions = array()) {
+        if ( self::FILE_IDENTIFIER == mb_substr( $html, 0, mb_strlen(self::FILE_IDENTIFIER)) ) {
+            // load from file instead of just using the given string
+            $file = mb_substr( $html, mb_strlen(self::FILE_IDENTIFIER));
+            $html = file_get_contents($file);
+        }
+        
         if ( isset($aOptions['exceptions']) && is_array($aOptions['exceptions']) ) {
             $css = $this->getCssWithExceptionsApplied($css, $aOptions['exceptions']);
         }
