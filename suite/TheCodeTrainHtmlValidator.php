@@ -60,8 +60,8 @@ class TheCodeTrainHtmlValidator {
      * @return boolean, or NO_VALIDATOR_RESPONSE if the chosen validator was
      *         not able to be reached.
      **/
-    public function isValid($html, $type = self::HTML_DOCUMENT) {
-        if ( self::HTML_CHUNK == $type ) {
+    public function isValid($html, $aOptions = array()) {
+        if ( isset($aOptions['document_section']) && self::HTML_CHUNK == $aOptions['document_section'] ) {
             $html = <<< HTML
 <!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01//EN" "http://www.w3.org/TR/html4/strict.dtd">
 <html>

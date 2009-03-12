@@ -28,7 +28,7 @@ class TheCodeTrainHtmlValidator_IsValidTest extends PHPUnit_Framework_TestCase {
      * @dataProvider TheCodeTrainHtmlValidatorProviders::validHtmlChunkProvider
      */
     public function testReturnsTrueWhenGivenValidHtmlChunk($input) {
-        $isValid = $this->obj->isValid($input, TheCodeTrainHtmlValidator::HTML_CHUNK);
+        $isValid = $this->obj->isValid($input, array('document_section'=>TheCodeTrainHtmlValidator::HTML_CHUNK));
         if ( TheCodeTrainHtmlValidator::NO_VALIDATOR_RESPONSE === $isValid ) {
             $this->markTestSkipped();
         }
@@ -39,7 +39,7 @@ class TheCodeTrainHtmlValidator_IsValidTest extends PHPUnit_Framework_TestCase {
      * @dataProvider TheCodeTrainHtmlValidatorProviders::invalidHtmlChunkProvider
      */
     public function testReturnsFalseWhenGivenInvalidHtmlChunk($input) {
-        $isValid = $this->obj->isValid($input, TheCodeTrainHtmlValidator::HTML_CHUNK);
+        $isValid = $this->obj->isValid($input, array('document_section'=>TheCodeTrainHtmlValidator::HTML_CHUNK));
         if ( TheCodeTrainHtmlValidator::NO_VALIDATOR_RESPONSE === $isValid ) {
             $this->markTestSkipped();
         }
@@ -58,7 +58,7 @@ class TheCodeTrainHtmlValidator_IsValidTest extends PHPUnit_Framework_TestCase {
 $input
 </body></html>
 HTML;
-        $isValid = $this->obj->isValid($html, TheCodeTrainHtmlValidator::HTML_DOCUMENT);
+        $isValid = $this->obj->isValid($html, array('document_section'=>TheCodeTrainHtmlValidator::HTML_DOCUMENT));
         if ( TheCodeTrainHtmlValidator::NO_VALIDATOR_RESPONSE === $isValid ) {
             $this->markTestSkipped();
         }
@@ -77,7 +77,7 @@ HTML;
 $input
 </body></html>
 HTML;
-        $isValid = $this->obj->isValid($html, TheCodeTrainHtmlValidator::HTML_DOCUMENT);
+        $isValid = $this->obj->isValid($html, array('document_section'=>TheCodeTrainHtmlValidator::HTML_DOCUMENT));
         if ( TheCodeTrainHtmlValidator::NO_VALIDATOR_RESPONSE === $isValid ) {
             $this->markTestSkipped();
         }

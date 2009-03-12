@@ -18,7 +18,7 @@ class TheCodeTrainHtmlValidator_GetErrorsTest extends PHPUnit_Framework_TestCase
      */
     public function testReturnsNoValidatorResponseWhenBadUrlGiven($input) {
         $validator = new TheCodeTrainHtmlValidator($input);
-        $validator->isValid('anything', TheCodeTrainHtmlValidator::HTML_CHUNK);
+        $validator->isValid('anything', array('document_section'=>TheCodeTrainHtmlValidator::HTML_CHUNK));
         $this->assertEquals(
             TheCodeTrainHtmlValidator::NO_VALIDATOR_RESPONSE,
             $validator->getErrors()
@@ -36,7 +36,7 @@ class TheCodeTrainHtmlValidator_GetErrorsTest extends PHPUnit_Framework_TestCase
      * @dataProvider TheCodeTrainHtmlValidatorProviders::validHtmlChunkProvider
      */
     public function testReturnsFalseWhenValidHtmlChunkTested($input) {
-        $isValid = $this->obj->isValid($input, TheCodeTrainHtmlValidator::HTML_CHUNK);
+        $isValid = $this->obj->isValid($input, array('document_section'=>TheCodeTrainHtmlValidator::HTML_CHUNK));
         $errors = $this->obj->getErrors();
         if ( TheCodeTrainHtmlValidator::NO_VALIDATOR_RESPONSE === $errors ) {
             $this->markTestSkipped();
@@ -48,7 +48,7 @@ class TheCodeTrainHtmlValidator_GetErrorsTest extends PHPUnit_Framework_TestCase
      * @dataProvider TheCodeTrainHtmlValidatorProviders::invalidHtmlChunkProvider
      */
     public function testReturnsArrayWhenInvalidHtmlChunkTested($input) {
-        $isValid = $this->obj->isValid($input, TheCodeTrainHtmlValidator::HTML_CHUNK);
+        $isValid = $this->obj->isValid($input, array('document_section'=>TheCodeTrainHtmlValidator::HTML_CHUNK));
         $errors = $this->obj->getErrors();
         if ( TheCodeTrainHtmlValidator::NO_VALIDATOR_RESPONSE === $errors ) {
             $this->markTestSkipped();
@@ -68,7 +68,7 @@ class TheCodeTrainHtmlValidator_GetErrorsTest extends PHPUnit_Framework_TestCase
 $input
 </body></html>
 HTML;
-        $isValid = $this->obj->isValid($html, TheCodeTrainHtmlValidator::HTML_DOCUMENT);
+        $isValid = $this->obj->isValid($html, array('document_section'=>TheCodeTrainHtmlValidator::HTML_DOCUMENT));
         $errors = $this->obj->getErrors();
         if ( TheCodeTrainHtmlValidator::NO_VALIDATOR_RESPONSE === $errors ) {
             $this->markTestSkipped();
@@ -88,7 +88,7 @@ HTML;
 $input
 </body></html>
 HTML;
-        $isValid = $this->obj->isValid($html, TheCodeTrainHtmlValidator::HTML_DOCUMENT);
+        $isValid = $this->obj->isValid($html, array('document_section'=>TheCodeTrainHtmlValidator::HTML_DOCUMENT));
         $errors = $this->obj->getErrors();
         if ( TheCodeTrainHtmlValidator::NO_VALIDATOR_RESPONSE === $errors ) {
             $this->markTestSkipped();
