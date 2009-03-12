@@ -50,6 +50,26 @@ class TheCodeTrainCssValidator {
         return preg_replace($regex, '/* $1 */', $css);
     }
     
+    protected function getCssWithExceptionsApplied($css, $e) {
+        if ( isset($e['star_prop']) && self::ALLOW === $e['star_prop'] ) {
+            $css = $this->commentOutCss($css, '/([*][-a-zA-Z0-9]+:[^;}]*;?)/');
+        }
+        
+        if ( isset($e['underscore_prop']) && self::ALLOW === $e['underscore_prop'] ) {
+            $css = $this->commentOutCss($css, '/([_][-a-zA-Z0-9]+:[^;}]*;?)/');
+        }
+        
+        if ( isset($e['yui_hacks']) && self::ALLOW === $e['yui_hacks'] ) {
+            $css = $this->commentOutCss($css, '/(font:100%;)/');
+            // 2.6.x
+            $css = $this->commentOutCss($css, '/(#bd,.yui-g,.yui-gb,.yui-gc,.yui-gd,.yui-ge,.yui-gf{zoom:1;})/');
+            // 2.7.0
+            $css = $this->commentOutCss($css, '/(#hd,#bd,#ft,.yui-g,.yui-gb,.yui-gc,.yui-gd,.yui-ge,.yui-gf{zoom:1;})/');            
+        }
+        
+        return $css;
+    }
+    
     /**
      * Validates a CSS document.
      *
@@ -60,25 +80,7 @@ class TheCodeTrainCssValidator {
      **/
     public function isValid($css, $aOptions = array()) {
         if ( isset($aOptions['exceptions']) && is_array($aOptions['exceptions']) ) {
-
-            $e = $aOptions['exceptions'];
-
-            if ( isset($e['star_prop']) && self::ALLOW === $e['star_prop'] ) {
-                $css = $this->commentOutCss($css, '/([*][-a-zA-Z0-9]+:[^;}]*;?)/');
-            }
-            
-            if ( isset($e['underscore_prop']) && self::ALLOW === $e['underscore_prop'] ) {
-                $css = $this->commentOutCss($css, '/([_][-a-zA-Z0-9]+:[^;}]*;?)/');
-            }
-            
-            if ( isset($e['yui_hacks']) && self::ALLOW === $e['yui_hacks'] ) {
-                $css = $this->commentOutCss($css, '/(font:100%;)/');
-                // 2.6.x
-                $css = $this->commentOutCss($css, '/(#bd,.yui-g,.yui-gb,.yui-gc,.yui-gd,.yui-ge,.yui-gf{zoom:1;})/');
-                // 2.7.0
-                $css = $this->commentOutCss($css, '/(#hd,#bd,#ft,.yui-g,.yui-gb,.yui-gc,.yui-gd,.yui-ge,.yui-gf{zoom:1;})/');            
-            }
-            
+            $css = $this->getCssWithExceptionsApplied($css, $aOptions['exceptions']);
         }
         
         $result = $this->getCurlResponse(
