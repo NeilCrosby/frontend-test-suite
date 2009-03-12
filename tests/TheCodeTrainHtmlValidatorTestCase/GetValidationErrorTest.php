@@ -58,7 +58,7 @@ class TheCodeTrainHtmlValidatorTestCase_GetValidationErrorTest extends PHPUnit_F
     public function testReturnsFalseWhenValidHtmlChunkWithPositionTested($input) {
         $errors = $this->obj->getValidationError(
             $input[0], 
-            array('document_section'=>TheCodeTrainHtmlValidator::HTML_CHUNK, 'position'=>$input[1])
+            array('document_section'=>TheCodeTrainHtmlValidator::HTML_CHUNK, 'document_section_position'=>$input[1])
         );
         $this->assertFalse($errors);
     }
@@ -69,7 +69,7 @@ class TheCodeTrainHtmlValidatorTestCase_GetValidationErrorTest extends PHPUnit_F
     public function testReturnsStringWhenInvalidHtmlChunkWithPositionTested($input) {
         $errors = $this->obj->getValidationError(
             $input[0], 
-            array('document_section'=>TheCodeTrainHtmlValidator::HTML_CHUNK, 'position'=>$input[1])
+            array('document_section'=>TheCodeTrainHtmlValidator::HTML_CHUNK, 'document_section_position'=>$input[1])
         );
         $this->assertType('string', $errors);
     }

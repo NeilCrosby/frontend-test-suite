@@ -17,36 +17,9 @@ abstract class TheCodeTrainHtmlValidatorTestCase extends PHPUnit_Framework_TestC
     }
    
     public function getValidationError($html, $options = array()) {
-        $type     = isset($options['document_section'])     ? $options['document_section']     : null;
-        $position = isset($options['position']) ? $options['position'] : TheCodeTrainHtmlValidator::POSITION_BODY;
-        
         $validator = new TheCodeTrainHtmlValidator($this->validatorUrl);
 
-        if ( TheCodeTrainHtmlValidator::HTML_CHUNK == $type ) {
-            if ( TheCodeTrainHtmlValidator::POSITION_HEAD == $position ) {
-                $html = <<< HTML
-<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01//EN" "http://www.w3.org/TR/html4/strict.dtd">
-<html>
-<head>
-$html
-</head>
-<body>
-<p>Empty body</p>
-</body></html>
-HTML;
-            } else {
-                $html = <<< HTML
-<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01//EN" "http://www.w3.org/TR/html4/strict.dtd">
-<html>
-<head><title>title</title></head>
-<body>
-$html
-</body></html>
-HTML;
-            }
-        }
-
-        $isValid = $validator->isValid($html);
+        $isValid = $validator->isValid($html, $options);
         
         if ( TheCodeTrainHtmlValidator::NO_VALIDATOR_RESPONSE === $isValid ) {
             $this->markTestSkipped('No validator');

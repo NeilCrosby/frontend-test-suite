@@ -61,8 +61,23 @@ class TheCodeTrainHtmlValidator {
      *         not able to be reached.
      **/
     public function isValid($html, $aOptions = array()) {
-        if ( isset($aOptions['document_section']) && self::HTML_CHUNK == $aOptions['document_section'] ) {
-            $html = <<< HTML
+        $type     = isset($aOptions['document_section']) ? $aOptions['document_section'] : null;
+        $position = isset($aOptions['document_section_position']) ? $aOptions['document_section_position'] : TheCodeTrainHtmlValidator::POSITION_BODY;
+
+        if ( TheCodeTrainHtmlValidator::HTML_CHUNK == $type ) {
+            if ( TheCodeTrainHtmlValidator::POSITION_HEAD == $position ) {
+                $html = <<< HTML
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01//EN" "http://www.w3.org/TR/html4/strict.dtd">
+<html>
+<head>
+$html
+</head>
+<body>
+<p>Empty body</p>
+</body></html>
+HTML;
+            } else {
+                $html = <<< HTML
 <!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01//EN" "http://www.w3.org/TR/html4/strict.dtd">
 <html>
 <head><title>title</title></head>
@@ -70,6 +85,7 @@ class TheCodeTrainHtmlValidator {
 $html
 </body></html>
 HTML;
+            }
         }
         
         $html = urlencode($html);
