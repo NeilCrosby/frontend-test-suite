@@ -17,7 +17,7 @@ abstract class TheCodeTrainHtmlValidatorTestCase extends PHPUnit_Framework_TestC
     }
    
     public function getValidationError($html, $options = array()) {
-        $type     = isset($options['type'])     ? $options['type']     : null;
+        $type     = isset($options['document_section'])     ? $options['document_section']     : null;
         $position = isset($options['position']) ? $options['position'] : TheCodeTrainHtmlValidator::POSITION_BODY;
         
         $validator = new TheCodeTrainHtmlValidator($this->validatorUrl);
