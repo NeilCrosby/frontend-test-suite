@@ -81,10 +81,10 @@ class TheCodeTrainCssValidator {
      *         not able to be reached.
      **/
     public function isValid($css, $aOptions = array()) {
-        if ( self::FILE_IDENTIFIER == mb_substr( $html, 0, mb_strlen(self::FILE_IDENTIFIER)) ) {
+        if ( self::FILE_IDENTIFIER == mb_substr( $css, 0, mb_strlen(self::FILE_IDENTIFIER)) ) {
             // load from file instead of just using the given string
-            $file = mb_substr( $html, mb_strlen(self::FILE_IDENTIFIER));
-            $html = file_get_contents($file);
+            $file = mb_substr( $css, mb_strlen(self::FILE_IDENTIFIER));
+            $css = file_get_contents($file);
         }
         
         if ( isset($aOptions['exceptions']) && is_array($aOptions['exceptions']) ) {

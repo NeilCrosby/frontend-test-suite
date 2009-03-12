@@ -38,6 +38,7 @@ class TheCodeTrainCssValidatorProviders {
             array(array("p{display:block;}#bd,.yui-g,.yui-gb,.yui-gc,.yui-gd,.yui-ge,.yui-gf{zoom:1;}li{display:block;}", array('yui_hacks'=>TheCodeTrainCssValidator::ALLOW))),
             array(array("p{display:block;}#hd,#bd,#ft,.yui-g,.yui-gb,.yui-gc,.yui-gd,.yui-ge,.yui-gf{zoom:1;}li{display:block;}", array('yui_hacks'=>TheCodeTrainCssValidator::ALLOW))),
             array(array("table{font-size:inherit;font:100%;}", array('yui_hacks'=>TheCodeTrainCssValidator::ALLOW))),
+            array(array("file://assets/css/yui-reset-fonts-grids.css", array('yui_hacks'=>TheCodeTrainCssValidator::ALLOW, 'star_prop'=>TheCodeTrainCssValidator::ALLOW, 'underscore_prop'=>TheCodeTrainCssValidator::ALLOW))),
         );
     }
 
@@ -48,6 +49,9 @@ class TheCodeTrainCssValidatorProviders {
             array(array("p { bllllllllah;", array('star_prop'=>TheCodeTrainCssValidator::ALLOW))),
             array(array("p { display: blah; *display: inline;}", array('star_prop'=>TheCodeTrainCssValidator::ALLOW))),
             array(array("p { *display: blah;}", array('underscore_prop'=>TheCodeTrainCssValidator::ALLOW))),
+            array(array("file://assets/css/yui-reset-fonts-grids.css", array('yui_hacks'=>TheCodeTrainCssValidator::ALLOW, 'star_prop'=>TheCodeTrainCssValidator::ALLOW))),
+            array(array("file://assets/css/yui-reset-fonts-grids.css", array('yui_hacks'=>TheCodeTrainCssValidator::ALLOW, 'underscore_prop'=>TheCodeTrainCssValidator::ALLOW))),
+            array(array("file://assets/css/yui-reset-fonts-grids.css", array('star_prop'=>TheCodeTrainCssValidator::ALLOW, 'underscore_prop'=>TheCodeTrainCssValidator::ALLOW))),
         );
     }
     
