@@ -46,6 +46,8 @@ class TheCodeTrainHtmlValidatorProviders {
             array('<p>Some text</pee>'),
             array('<p>Two errors in this<img src="whee.png"></pee>'),
             array("<title>This can't go in the body</title>"),
+            array("<b><u>hello</b></u>"),
+            array("<b><u>hello</b>"),
         );
     }
 
