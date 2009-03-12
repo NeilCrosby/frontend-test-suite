@@ -47,18 +47,10 @@ class TheCodeTrainHtmlValidator_IsValidTest extends PHPUnit_Framework_TestCase {
     }
     
     /**
-     * @dataProvider TheCodeTrainHtmlValidatorProviders::validHtmlChunkProvider
+     * @dataProvider TheCodeTrainHtmlValidatorProviders::validHtmlDocumentProvider
      */
     public function testReturnsTrueWhenGivenValidHtmlDocument($input) {
-        $html = <<< HTML
-<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01//EN" "http://www.w3.org/TR/html4/strict.dtd">
-<html>
-<head><title>title</title></head>
-<body>
-$input
-</body></html>
-HTML;
-        $isValid = $this->obj->isValid($html, array('document_section'=>TheCodeTrainHtmlValidator::HTML_DOCUMENT));
+        $isValid = $this->obj->isValid($input, array('document_section'=>TheCodeTrainHtmlValidator::HTML_DOCUMENT));
         if ( TheCodeTrainHtmlValidator::NO_VALIDATOR_RESPONSE === $isValid ) {
             $this->markTestSkipped();
         }
@@ -66,18 +58,10 @@ HTML;
     }
 
     /**
-     * @dataProvider TheCodeTrainHtmlValidatorProviders::invalidHtmlChunkProvider
+     * @dataProvider TheCodeTrainHtmlValidatorProviders::invalidHtmlDocumentProvider
      */
     public function testReturnsFalseWhenGivenInvalidHtmlDocument($input) {
-        $html = <<< HTML
-<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01//EN" "http://www.w3.org/TR/html4/strict.dtd">
-<html>
-<head><title>title</title></head>
-<body>
-$input
-</body></html>
-HTML;
-        $isValid = $this->obj->isValid($html, array('document_section'=>TheCodeTrainHtmlValidator::HTML_DOCUMENT));
+        $isValid = $this->obj->isValid($input, array('document_section'=>TheCodeTrainHtmlValidator::HTML_DOCUMENT));
         if ( TheCodeTrainHtmlValidator::NO_VALIDATOR_RESPONSE === $isValid ) {
             $this->markTestSkipped();
         }

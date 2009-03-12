@@ -7,6 +7,27 @@
  **/
 class TheCodeTrainHtmlValidatorProviders {
     
+    public static function fileProvider($path) {
+        $return = array();
+        if ($handle = opendir($path)) {
+            while (false !== ($file = readdir($handle))) {
+                if ($file != "." && $file != "..") {
+                    array_push($return, array('file://'.$path.$file));
+                }
+            }
+            closedir($handle);
+        }
+        return $return;
+    }
+    
+    public static function validHtmlDocumentProvider() {
+        return self::fileProvider('assets/html/valid/');
+    }
+    
+    public static function invalidHtmlDocumentProvider() {
+        return self::fileProvider('assets/html/invalid/');
+    }
+    
     public static function validHtmlChunkProvider() {
         return array(
             array('<p>Some text</p>'),

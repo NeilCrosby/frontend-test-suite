@@ -11,6 +11,7 @@
  **/
 class TheCodeTrainHtmlValidator {
     
+    const FILE_NOT_FOUND = -2;
     const NO_VALIDATOR_RESPONSE = -1;
     const NO_ERROR = false;
 
@@ -19,6 +20,8 @@ class TheCodeTrainHtmlValidator {
     
     const POSITION_BODY = 0;
     const POSITION_HEAD = 1;
+    
+    const FILE_IDENTIFIER = 'file://';
     
     public function __construct($validationUrl=null) {
         if ( !$validationUrl ) {
@@ -64,6 +67,12 @@ class TheCodeTrainHtmlValidator {
         $type     = isset($aOptions['document_section']) ? $aOptions['document_section'] : null;
         $position = isset($aOptions['document_section_position']) ? $aOptions['document_section_position'] : TheCodeTrainHtmlValidator::POSITION_BODY;
 
+        if ( self::FILE_IDENTIFIER == mb_substr( $html, 0, mb_strlen(self::FILE_IDENTIFIER)) ) {
+            // load from file instead of just using the given string
+            $file = mb_substr( $html, mb_strlen(self::FILE_IDENTIFIER));
+            $html = file_get_contents($file);
+        }
+        
         if ( TheCodeTrainHtmlValidator::HTML_CHUNK == $type ) {
             if ( TheCodeTrainHtmlValidator::POSITION_HEAD == $position ) {
                 $html = <<< HTML
