@@ -1,5 +1,7 @@
 <?php
 
+require_once('TheCodeTrainBaseValidator.php');
+
 /**
  * Validates HTML.  Full HTML documents are validated against whatever
  * doctype they are sent with, whereas HTML chunks are validated against
@@ -9,50 +11,13 @@
  * @license Creative Commons Attribution-Share Alike 3.0 Unported 
  *          http://creativecommons.org/licenses/by-sa/3.0/
  **/
-class TheCodeTrainHtmlValidator {
+class TheCodeTrainHtmlValidator extends TheCodeTrainBaseValidator {
     
-    const FILE_NOT_FOUND = -2;
-    const NO_VALIDATOR_RESPONSE = -1;
-    const NO_ERROR = false;
-
     const HTML_DOCUMENT = 5;
     const HTML_CHUNK    = 10;
     
     const POSITION_BODY = 0;
     const POSITION_HEAD = 1;
-    
-    const FILE_IDENTIFIER = 'file://';
-    
-    public function __construct($validationUrl=null) {
-        if ( !$validationUrl ) {
-            throw new Exception('No validation URL given.');
-            return false;
-        }
-        // TODO validate the validation URL
-        $this->validationUrl = $validationUrl;
-    }
-    
-    protected function getCurlResponse( $url, $aOptions = array() ) {
-
-        $session = curl_init();
-        curl_setopt( $session, CURLOPT_URL, $url );
-        
-        $showHeader = ( isset($aOptions['headers']) && $aOptions['headers'] ) ? true : false;
-        
-        curl_setopt( $session, CURLOPT_HEADER, $showHeader );
-        curl_setopt( $session, CURLOPT_RETURNTRANSFER, 1 );
-        
-        if ( isset($aOptions['post']) ) {
-            curl_setopt( $session, CURLOPT_POST, 1 );
-            curl_setopt( $session, CURLOPT_POSTFIELDS, $aOptions['post'] );
-        }
-
-        $result = curl_exec( $session );
-
-        curl_close( $session );
-        
-        return $result;
-    }
     
     /**
      * Validates an HTML chunk or full document.
