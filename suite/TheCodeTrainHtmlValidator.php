@@ -29,7 +29,7 @@ class TheCodeTrainHtmlValidator extends TheCodeTrainBaseValidator {
      *         not able to be reached.
      **/
     public function isValid($html, $aOptions = array()) {
-        $type     = isset($aOptions['document_section']) ? $aOptions['document_section'] : null;
+        $section  = isset($aOptions['document_section']) ? $aOptions['document_section'] : null;
         $position = isset($aOptions['document_section_position']) ? $aOptions['document_section_position'] : TheCodeTrainHtmlValidator::POSITION_BODY;
 
         if ( self::FILE_IDENTIFIER == mb_substr( $html, 0, mb_strlen(self::FILE_IDENTIFIER)) ) {
@@ -38,7 +38,7 @@ class TheCodeTrainHtmlValidator extends TheCodeTrainBaseValidator {
             $html = file_get_contents($file);
         }
         
-        if ( TheCodeTrainHtmlValidator::HTML_CHUNK == $type ) {
+        if ( TheCodeTrainHtmlValidator::HTML_CHUNK == $section ) {
             if ( TheCodeTrainHtmlValidator::POSITION_HEAD == $position ) {
                 $html = <<< HTML
 <!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01//EN" "http://www.w3.org/TR/html4/strict.dtd">
