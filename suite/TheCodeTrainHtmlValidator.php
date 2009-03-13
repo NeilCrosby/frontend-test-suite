@@ -29,7 +29,6 @@ class TheCodeTrainHtmlValidator extends TheCodeTrainBaseValidator {
      *         not able to be reached.
      **/
     public function isValid($html, $aOptions = array()) {
-        $doctype  = isset($aOptions['doctype']) ? $aOptions['doctype'] : null;
         $section  = isset($aOptions['document_section']) ? $aOptions['document_section'] : null;
         $position = isset($aOptions['document_section_position']) ? $aOptions['document_section_position'] : TheCodeTrainHtmlValidator::POSITION_BODY;
 
@@ -65,11 +64,6 @@ HTML;
         
         $html = urlencode($html);
         
-        $postFields = array(
-            'fragment' => $html,
-            '$output' => 'soap12',
-        );
-
         $result = $this->getCurlResponse(
             $this->validationUrl,
             array('post'=>"fragment=$html&output=soap12")
