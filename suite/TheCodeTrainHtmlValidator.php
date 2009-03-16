@@ -19,6 +19,8 @@ class TheCodeTrainHtmlValidator extends TheCodeTrainBaseValidator {
     const POSITION_BODY = 0;
     const POSITION_HEAD = 1;
     
+    protected $errorPointer = array('envBody', 'mmarkupvalidationresponse', 'mresult', 'merrors');
+
     /**
      * Validates an HTML chunk or full document.
      *
@@ -84,32 +86,5 @@ HTML;
         }
         
         return false;
-
     }
-    
-    public function getErrors() {
-        if ( !isset($this->lastResult) || !$this->lastResult ) {
-            return self::NO_VALIDATOR_RESPONSE;
-        }
-        
-        if (strpos( $this->lastResult, "<m:validity>true</m:validity>" )) {
-            return self::NO_ERROR;
-        }
-        
-        $result = $this->getSanitisedSimpleXml($this->lastResult);
-
-        if ( 1 == $result->envBody->mmarkupvalidationresponse->merrors->merrorcount ) {
-            $error = $result->envBody->mmarkupvalidationresponse->merrors->merrorlist->merror; 
-            return array("Line {$error->mline}: {$error->mmessage}");
-        }
-
-
-        $errors = array();
-        foreach ($result->envBody->mmarkupvalidationresponse->merrors->merrorlist->merror as $error) {
-            array_push($errors, "Line {$error->mline}: {$error->mmessage}");
-        }
-        
-        return $errors;
-    }
-    
 }

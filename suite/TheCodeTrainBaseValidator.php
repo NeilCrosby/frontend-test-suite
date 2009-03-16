@@ -13,6 +13,8 @@ abstract class TheCodeTrainBaseValidator {
 
     const FILE_IDENTIFIER = 'file://';
     
+    protected $errorPointer = array('envBody', 'mmarkupvalidationresponse', 'mresult', 'merrors');
+    
     public function __construct($validationUrl=null) {
         if ( !$validationUrl ) {
             throw new Exception('No validation URL given.');
@@ -52,8 +54,39 @@ abstract class TheCodeTrainBaseValidator {
         return simplexml_load_string($result);
     }
     
-    abstract public function isValid($html, $aOptions = array());
+    public function getErrors() {
+        if ( !isset($this->lastResult) || !$this->lastResult ) {
+            return self::NO_VALIDATOR_RESPONSE;
+        }
+        
+        if (strpos( $this->lastResult, "<m:validity>true</m:validity>" )) {
+            return self::NO_ERROR;
+        }
+        
+        $result = $this->getSanitisedSimpleXml($this->lastResult);
+        
+        foreach ( $this->errorPointer as $item ) {
+            foreach ( $result->children() as $child ) {
+                if ( $child->getName() == $item ) {
+                    $result = $child;
+                    break;
+                }
+            } 
+        }
+
+        if ( 1 == $result->merrorcount ) {
+            $error = $result->merrorlist->merror; 
+            return array("Line {$error->mline}: {$error->mmessage}");
+        }
+
+        $errors = array();
+        foreach ($result->merrorlist->merror as $error) {
+            array_push($errors, "Line {$error->mline}: {$error->mmessage}");
+        }
+        
+        return $errors;
+    }
     
-    abstract public function getErrors();
+    abstract public function isValid($html, $aOptions = array());
     
 }

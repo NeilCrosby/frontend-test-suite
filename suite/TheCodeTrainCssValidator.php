@@ -11,6 +11,7 @@ class TheCodeTrainCssValidator extends TheCodeTrainBaseValidator {
     
     const ALLOW = 1;
     const DISALLOW = 0;
+    public $errorPointer = array('envBody', 'mcssvalidationresponse', 'mresult', 'merrors');
 
     protected function commentOutCss($css, $regex) {
         return preg_replace($regex, '/* $1 */', $css);
@@ -71,32 +72,5 @@ class TheCodeTrainCssValidator extends TheCodeTrainBaseValidator {
         }
     
         return false;
-    
     }
-    
-    public function getErrors() {
-        if ( !isset($this->lastResult) || !$this->lastResult ) {
-            return self::NO_VALIDATOR_RESPONSE;
-        }
-        
-        if (strpos( $this->lastResult, "<m:validity>true</m:validity>" )) {
-            return self::NO_ERROR;
-        }
-        
-        $result = $this->getSanitisedSimpleXml($this->lastResult);
-
-        if ( 1 == $result->envBody->mcssvalidationresponse->mresult->merrors->merrorcount ) {
-            $error = $result->envBody->mcssvalidationresponse->mresult->merrors->merrorlist->merror; 
-            return array("Line {$error->mline}: {$error->mmessage}");
-        }
-
-
-        $errors = array();
-        foreach ($result->envBody->mcssvalidationresponse->mresult->merrors->merrorlist->merror as $error) {
-            array_push($errors, "Line {$error->mline}: {$error->mmessage}");
-        }
-        
-        return $errors;
-    }
-    
 }
