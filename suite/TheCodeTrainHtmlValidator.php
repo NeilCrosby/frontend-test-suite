@@ -96,8 +96,7 @@ HTML;
             return self::NO_ERROR;
         }
         
-        $result = preg_replace("/(<\/?)(\w+):([^>]*>)/", "$1$2$3", $this->lastResult);
-        $result = simplexml_load_string($result);
+        $result = $this->getSanitisedSimpleXml($this->lastResult);
 
         if ( 1 == $result->envBody->mmarkupvalidationresponse->merrors->merrorcount ) {
             $error = $result->envBody->mmarkupvalidationresponse->merrors->merrorlist->merror; 

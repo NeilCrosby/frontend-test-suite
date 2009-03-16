@@ -83,11 +83,7 @@ class TheCodeTrainCssValidator extends TheCodeTrainBaseValidator {
             return self::NO_ERROR;
         }
         
-        // turns pesky colon namespaced element anems into simple ones, just
-        // by getting rid of the colons
-        $result = preg_replace("/(<\/?)(\w+):([^>]*>)/", "$1$2$3", $this->lastResult);
-        
-        $result = simplexml_load_string($result);
+        $result = $this->getSanitisedSimpleXml($this->lastResult);
 
         if ( 1 == $result->envBody->mcssvalidationresponse->mresult->merrors->merrorcount ) {
             $error = $result->envBody->mcssvalidationresponse->mresult->merrors->merrorlist->merror; 

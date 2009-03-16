@@ -44,6 +44,14 @@ abstract class TheCodeTrainBaseValidator {
         return $result;
     }
     
+    protected function getSanitisedSimpleXml($xmlString) {
+        // turns pesky colon namespaced element anems into simple ones, just
+        // by getting rid of the colons
+        $result = preg_replace("/(<\/?)(\w+):([^>]*>)/", "$1$2$3", $xmlString);
+        
+        return simplexml_load_string($result);
+    }
+    
     abstract public function isValid($html, $aOptions = array());
     
     abstract public function getErrors();
