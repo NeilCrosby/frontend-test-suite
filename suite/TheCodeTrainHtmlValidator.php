@@ -65,14 +65,9 @@ HTML;
             }
         }
         
-        $postFields = array(
-            'fragment' => $html,
-            'output' => 'soap12',
-        );
-        
         $result = $this->getCurlResponse(
             $this->validationUrl,
-            array('post'=>$postFields)
+            array('post'=>array('fragment' => $html,'output' => 'soap12'))
         );
 
         $this->lastResult = $result;
