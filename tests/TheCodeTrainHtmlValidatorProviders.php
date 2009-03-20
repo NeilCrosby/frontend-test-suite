@@ -34,10 +34,16 @@ class TheCodeTrainHtmlValidatorProviders {
         );
     }
 
-    public static function validHtmlChunkWithPositionProvider() {
+    public static function validHtmlChunkWithOptionsProvider() {
         return array(
-            array(array('<p>Some text</p>', TheCodeTrainHtmlValidator::POSITION_BODY)),
-            array(array('<title>Some Title</title>', TheCodeTrainHtmlValidator::POSITION_HEAD)),
+            array(array('<p>Some text</p>', array(
+                'document_section'=>TheCodeTrainHtmlValidator::HTML_CHUNK, 
+                'document_section_position'=>TheCodeTrainHtmlValidator::POSITION_BODY
+            ))),
+            array(array('<title>Some Title</title>', array(
+                'document_section'=>TheCodeTrainHtmlValidator::HTML_CHUNK, 
+                'document_section_position'=>TheCodeTrainHtmlValidator::POSITION_HEAD
+            ))),
         );
     }
 
@@ -51,14 +57,32 @@ class TheCodeTrainHtmlValidatorProviders {
         );
     }
 
-    public static function invalidHtmlChunkWithPositionProvider() {
+    public static function invalidHtmlChunkWithOptionsProvider() {
         return array(
-            array(array('<p>Some text</pee>', TheCodeTrainHtmlValidator::POSITION_BODY)),
-            array(array('<p>Two errors in this<img src="whee.png"></pee>', TheCodeTrainHtmlValidator::POSITION_BODY)),
-            array(array("<title>This can't go in the body</title>", TheCodeTrainHtmlValidator::POSITION_BODY)),
-            array(array("<p>This can't go in the head</p>", TheCodeTrainHtmlValidator::POSITION_HEAD)),
-            array(array('<p>Some text</pee>', TheCodeTrainHtmlValidator::POSITION_HEAD)),
-            array(array('<p>Two errors in this<img src="whee.png"></pee>', TheCodeTrainHtmlValidator::POSITION_HEAD)),
+            array(array('<p>Some text</pee>', array(
+                'document_section'=>TheCodeTrainHtmlValidator::HTML_CHUNK, 
+                'document_section_position'=>TheCodeTrainHtmlValidator::POSITION_BODY
+            ))),
+            array(array('<p>Two errors in this<img src="whee.png"></pee>', array(
+                'document_section'=>TheCodeTrainHtmlValidator::HTML_CHUNK, 
+                'document_section_position'=>TheCodeTrainHtmlValidator::POSITION_BODY
+            ))),
+            array(array("<title>This can't go in the body</title>", array(
+                'document_section'=>TheCodeTrainHtmlValidator::HTML_CHUNK, 
+                'document_section_position'=>TheCodeTrainHtmlValidator::POSITION_BODY
+            ))),
+            array(array("<p>This can't go in the head</p>", array(
+                'document_section'=>TheCodeTrainHtmlValidator::HTML_CHUNK, 
+                'document_section_position'=>TheCodeTrainHtmlValidator::POSITION_HEAD
+            ))),
+            array(array('<p>Some text</pee>', array(
+                'document_section'=>TheCodeTrainHtmlValidator::HTML_CHUNK, 
+                'document_section_position'=>TheCodeTrainHtmlValidator::POSITION_HEAD
+            ))),
+            array(array('<p>Two errors in this<img src="whee.png"></pee>', array(
+                'document_section'=>TheCodeTrainHtmlValidator::HTML_CHUNK, 
+                'document_section_position'=>TheCodeTrainHtmlValidator::POSITION_HEAD
+            ))),
         );
     }
 
