@@ -72,7 +72,6 @@ HTML;
             $html = preg_replace("/^(<!DOCTYPE\s+[^>]*>)/", $doctypeOverride, $html);
         }
         
-        
         $result = $this->getCurlResponse(
             $this->validationUrl,
             array('post'=>array('fragment' => $html,'output' => 'soap12'))
