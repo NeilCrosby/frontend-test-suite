@@ -31,7 +31,7 @@ class TheCodeTrainHtmlValidator extends TheCodeTrainBaseValidator {
      *         not able to be reached.
      **/
     public function isValid($html, $aOptions = array()) {
-        $doctype  = isset($aOptions['doctype']) ? $aOptions['doctype'] : null;
+        $doctypeOverride  = isset($aOptions['doctype_override']) ? $aOptions['doctype_override'] : null;
         $section  = isset($aOptions['document_section']) ? $aOptions['document_section'] : null;
         $position = isset($aOptions['document_section_position']) ? $aOptions['document_section_position'] : TheCodeTrainHtmlValidator::POSITION_BODY;
 
@@ -64,6 +64,14 @@ $html
 HTML;
             }
         }
+        
+        #$doctypeOverride = '<!DOCTYPE HTML SYSTEM "http://temp:8888/dtd/yahoo2.dtd">';
+        if ( $doctypeOverride ) {
+            // we do this the same way that the actual W3C HTML Validator
+            // does it. If it's good enough for them, it's good enough for me.
+            $html = preg_replace("/^(<!DOCTYPE\s+[^>]*>)/", $doctypeOverride, $html);
+        }
+        
         
         $result = $this->getCurlResponse(
             $this->validationUrl,
