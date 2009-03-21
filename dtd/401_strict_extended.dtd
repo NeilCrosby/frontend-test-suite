@@ -1,0 +1,39 @@
+<!--
+    This is HTML 4.01 Strict Extended DTD.
+    
+    This DTD is based off the HTML 4.01 Strict DTD, with allowances for
+    iframe elements and the start attribute on ordered lists.
+-->
+
+<!ENTITY % special
+   "A | IMG | OBJECT | BR | SCRIPT | MAP | Q | SUB | SUP | SPAN | BDO | IFRAME">
+
+<!ENTITY % HTML.strict SYSTEM "strict.dtd">
+
+%HTML.strict;
+
+<!ATTLIST OL
+  %attrs;                              -- %coreattrs, %i18n, %events --
+  start       NUMBER         #IMPLIED  -- starting sequence number --
+  >
+
+
+<!--================== Document Frames ===================================-->
+
+<!-- TODO we're not dealing with the BUTTON IFRAME stuff -->
+
+<!ELEMENT IFRAME - - (%flow;)*         -- inline subwindow -->
+<!ATTLIST IFRAME
+%coreattrs;                          -- id, class, style, title --
+longdesc    %URI;          #IMPLIED  -- link to long description
+                                        (complements title) --
+name        CDATA          #IMPLIED  -- name of frame for targetting --
+src         %URI;          #IMPLIED  -- source of frame content --
+frameborder (1|0)          1         -- request frame borders? --
+marginwidth %Pixels;       #IMPLIED  -- margin widths in pixels --
+marginheight %Pixels;      #IMPLIED  -- margin height in pixels --
+scrolling   (yes|no|auto)  auto      -- scrollbar or none --
+height      %Length;       #IMPLIED  -- frame height --
+width       %Length;       #IMPLIED  -- frame width --
+>
+

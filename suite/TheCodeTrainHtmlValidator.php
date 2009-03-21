@@ -65,7 +65,6 @@ HTML;
             }
         }
         
-        #$doctypeOverride = '<!DOCTYPE HTML SYSTEM "http://temp:8888/dtd/yahoo2.dtd">';
         if ( $doctypeOverride ) {
             // we do this the same way that the actual W3C HTML Validator
             // does it. If it's good enough for them, it's good enough for me.

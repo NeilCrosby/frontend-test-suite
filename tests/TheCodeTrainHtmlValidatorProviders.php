@@ -7,6 +7,8 @@
  **/
 class TheCodeTrainHtmlValidatorProviders {
     
+    const DTD_401_STRICT_EXTENDED = '<!DOCTYPE HTML SYSTEM "http://dtd:8888/401_strict_extended.dtd">';
+    
     public static function fileProvider($path) {
         $return = array();
         if ($handle = opendir($path)) {
@@ -41,8 +43,16 @@ class TheCodeTrainHtmlValidatorProviders {
                 'document_section_position'=>TheCodeTrainHtmlValidator::POSITION_BODY
             ))),
             array(array('<title>Some Title</title>', array(
-                'document_section'=>TheCodeTrainHtmlValidator::HTML_CHUNK, 
+                'document_section'=>TheCodeTrainHtmlValidator::HTML_CHUNK,
                 'document_section_position'=>TheCodeTrainHtmlValidator::POSITION_HEAD
+            ))),
+            array(array('<div><iframe src="fishy.html"></iframe></div>', array(
+                'document_section'=>TheCodeTrainHtmlValidator::HTML_CHUNK,
+                'doctype_override'=>self::DTD_401_STRICT_EXTENDED,
+            ))),
+            array(array('<ol start="5"><li>list item</li></ol>', array(
+                'document_section'=>TheCodeTrainHtmlValidator::HTML_CHUNK,
+                'doctype_override'=>self::DTD_401_STRICT_EXTENDED,
             ))),
         );
     }
@@ -54,6 +64,8 @@ class TheCodeTrainHtmlValidatorProviders {
             array("<title>This can't go in the body</title>"),
             array("<b><u>hello</b></u>"),
             array("<b><u>hello</b>"),
+            array('<iframe src="fishy.html"></iframe>'),
+            array('<ol start="5"><li>list item</li></ol>'),
         );
     }
 
