@@ -26,40 +26,25 @@ class TheCodeTrainJsLinterProviders {
     
     public static function validJsWithOptionsProvider() {
         return array(
-            array(array('p {display: block; *display: inline;}', array('star_prop'=>TheCodeTrainCssValidator::ALLOW))),
-            array(array('p {*display: inline;display: block;}', array('star_prop'=>TheCodeTrainCssValidator::ALLOW))),
-            array(array('p { display: block; _display: inline}', array('underscore_prop'=>TheCodeTrainCssValidator::ALLOW))),
-            array(array('p {_display: inline;display: block }', array('underscore_prop'=>TheCodeTrainCssValidator::ALLOW))),
-            array(array("p{display:block;}#bd,.yui-g,.yui-gb,.yui-gc,.yui-gd,.yui-ge,.yui-gf{zoom:1;}li{display:block;}", array('yui_hacks'=>TheCodeTrainCssValidator::ALLOW))),
-            array(array("p{display:block;}#hd,#bd,#ft,.yui-g,.yui-gb,.yui-gc,.yui-gd,.yui-ge,.yui-gf{zoom:1;}li{display:block;}", array('yui_hacks'=>TheCodeTrainCssValidator::ALLOW))),
-            array(array("table{font-size:inherit;font:100%;}", array('yui_hacks'=>TheCodeTrainCssValidator::ALLOW))),
-            array(array("file://assets/css/yui-reset-fonts-grids.css", array('yui_hacks'=>TheCodeTrainCssValidator::ALLOW, 'star_prop'=>TheCodeTrainCssValidator::ALLOW, 'underscore_prop'=>TheCodeTrainCssValidator::ALLOW))),
+            array(array('var alice = "bob";', array('options'=>TheCodeTrainJsLinter::OPTIONS_RECOMMENDED))),
+            array(array('var alice = "bob";', array('options'=>TheCodeTrainJsLinter::OPTIONS_GOOD_PARTS))),
+            array(array('var alice = "bob";', array('options'=>'/*jslint white: true */'))),
+            array(array('file://assets/js/valid/valid.js', array('options'=>TheCodeTrainJsLinter::OPTIONS_RECOMMENDED))),
         );
     }
 
     public static function invalidJsWithOptionsProvider() {
         return array(
-            array(array('<p>Some text</pee>', array('star_prop'=>TheCodeTrainCssValidator::ALLOW))),
-            array(array('itvehrb jgskhg; fstoiaeoyufsfgoi', array('star_prop'=>TheCodeTrainCssValidator::ALLOW))),
-            array(array("p { bllllllllah;", array('star_prop'=>TheCodeTrainCssValidator::ALLOW))),
-            array(array("p { display: blah; *display: inline;}", array('star_prop'=>TheCodeTrainCssValidator::ALLOW))),
-            array(array("p { *display: blah;}", array('underscore_prop'=>TheCodeTrainCssValidator::ALLOW))),
-            array(array("file://assets/css/yui-reset-fonts-grids.css", array('yui_hacks'=>TheCodeTrainCssValidator::ALLOW, 'star_prop'=>TheCodeTrainCssValidator::ALLOW))),
-            array(array("file://assets/css/yui-reset-fonts-grids.css", array('yui_hacks'=>TheCodeTrainCssValidator::ALLOW, 'underscore_prop'=>TheCodeTrainCssValidator::ALLOW))),
-            array(array("file://assets/css/yui-reset-fonts-grids.css", array('star_prop'=>TheCodeTrainCssValidator::ALLOW, 'underscore_prop'=>TheCodeTrainCssValidator::ALLOW))),
+            array(array('var alice= "bob";', array('options'=>TheCodeTrainJsLinter::OPTIONS_RECOMMENDED))),
+            array(array('var alice= "bob";', array('options'=>TheCodeTrainJsLinter::OPTIONS_GOOD_PARTS))),
+            array(array('var alice= "bob";', array('options'=>'/*jslint white: true */'))),
+            array(array('file://assets/js/invalid/invalid.js', array('options'=>TheCodeTrainJsLinter::OPTIONS_RECOMMENDED))),
         );
     }
     
-    public static function validValidatorUrlProvider() {
+    public static function validLintCommandProvider() {
         return array(
-            //array('http://jigsaw.w3.org/css-validator/validator'),
-            array('http://127.0.0.1:8080/css-validator/validator'),
-        );
-    }
-    
-    public static function invalidValidatorUrlProvider() {
-        return array(
-            array('http://thisdefinitelydoesntexist.thecodetrain.co.uk/'),
+            array('java org.mozilla.javascript.tools.shell.Main ~/Library/JSLint/jslint.js'),
         );
     }
     
