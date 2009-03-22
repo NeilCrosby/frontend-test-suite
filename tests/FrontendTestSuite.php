@@ -1,5 +1,7 @@
 <?php
 
+ini_set('display_errors', true);
+
 if ( !function_exists('__autoload') ) {
     function __autoload($class) {
         $class = str_replace( '_', '/', $class );
