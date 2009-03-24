@@ -47,7 +47,7 @@ class TheCodeTrainJsLinterTestCase_GetLintErrorsTest extends PHPUnit_Framework_T
     /**
      * @dataProvider TheCodeTrainJsLinterProviders::invalidJsProvider
      */
-    public function testReturnsStringWhenInvalidCssTested($input) {
+    public function testReturnsArrayWhenInvalidJsTested($input) {
         $errors = $this->obj->getLintErrors($input);
         $this->assertType('array', $errors);
     }
@@ -63,7 +63,7 @@ class TheCodeTrainJsLinterTestCase_GetLintErrorsTest extends PHPUnit_Framework_T
     /**
      * @dataProvider TheCodeTrainJsLinterProviders::invalidJsWithOptionsProvider
      */
-    public function testReturnsStringWhenInvalidCssWithExceptionsTested($input) {
+    public function testReturnsArrayWhenInvalidJsWithExceptionsTested($input) {
         $errors = $this->obj->getLintErrors($input[0], $input[1]);
         $this->assertType('array', $errors);
     }

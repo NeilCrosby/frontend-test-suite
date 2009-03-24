@@ -47,9 +47,9 @@ class TheCodeTrainCssValidatorTestCase_GetValidationErrorTest extends PHPUnit_Fr
     /**
      * @dataProvider TheCodeTrainCssValidatorProviders::invalidCssProvider
      */
-    public function testReturnsStringWhenInvalidCssTested($input) {
+    public function testReturnsArrayWhenInvalidCssTested($input) {
         $errors = $this->obj->getValidationError($input);
-        $this->assertType('string', $errors);
+        $this->assertType('array', $errors);
     }
 
     /**
@@ -63,9 +63,9 @@ class TheCodeTrainCssValidatorTestCase_GetValidationErrorTest extends PHPUnit_Fr
     /**
      * @dataProvider TheCodeTrainCssValidatorProviders::invalidCssWithExceptionsProvider
      */
-    public function testReturnsStringWhenInvalidCssWithExceptionsTested($input) {
+    public function testReturnsArrayWhenInvalidCssWithExceptionsTested($input) {
         $errors = $this->obj->getValidationError($input[0], array('exceptions'=>$input[1]));
-        $this->assertType('string', $errors);
+        $this->assertType('array', $errors);
     }
 }
 ?>

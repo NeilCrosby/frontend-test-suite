@@ -13,7 +13,7 @@ abstract class TheCodeTrainBaseValidatorTestCase extends PHPUnit_Framework_TestC
         $this->validatorUrl = $url;
     }
    
-    public function getValidationError($input, $options = array()) {
+    public function getValidationErrors($input, $options = array()) {
         $class = $this->validatorClass;
         $validator = new $class($this->validatorUrl);
         $isValid = $validator->isValid($input, $options);
@@ -25,8 +25,16 @@ abstract class TheCodeTrainBaseValidatorTestCase extends PHPUnit_Framework_TestC
         }
         
         $result = $validator->getErrors();
+        return $result;
+    }
+
+    public function getValidationError($input, $options = array()) {
+        $result = $this->getValidationErrors($input, $options);
         
-        return $result[0];
+        if ( is_array($result) ) {
+            return $result[0];
+        }
+        return $result;
     }
 }
 ?>

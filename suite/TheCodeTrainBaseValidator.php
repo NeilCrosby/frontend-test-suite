@@ -74,15 +74,25 @@ abstract class TheCodeTrainBaseValidator {
                 }
             } 
         }
-
+        
         if ( 1 == $result->merrorcount ) {
-            $error = $result->merrorlist->merror; 
-            return array("Line {$error->mline}: {$error->mmessage}");
+            $error = $result->merrorlist->merror;
+            return array(array(
+                'line' => (string)$error->mline,
+                'errortype' => (string)$error->merrortype,
+                'error' => (string)$error->mmessage,
+                'original_line' => (string)$error->mcontext,
+            ));
         }
 
         $errors = array();
         foreach ($result->merrorlist->merror as $error) {
-            array_push($errors, "Line {$error->mline}: {$error->mmessage}");
+            array_push($errors, array(
+                'line' => (string)$error->mline,
+                'errortype' => (string)$error->merrortype,
+                'error' => (string)$error->mmessage,
+                'original_line' => (string)$error->mcontext,
+            ));
         }
         
         return $errors;

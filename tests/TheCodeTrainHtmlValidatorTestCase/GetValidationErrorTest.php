@@ -47,9 +47,9 @@ class TheCodeTrainHtmlValidatorTestCase_GetValidationErrorTest extends PHPUnit_F
     /**
      * @dataProvider TheCodeTrainHtmlValidatorProviders::invalidHtmlChunkProvider
      */
-    public function testReturnsStringWhenInvalidHtmlChunkTested($input) {
+    public function testReturnsArrayWhenInvalidHtmlChunkTested($input) {
         $errors = $this->obj->getValidationError($input, array('document_section'=>TheCodeTrainHtmlValidator::HTML_CHUNK));
-        $this->assertType('string', $errors);
+        $this->assertType('array', $errors);
     }
 
     /**
@@ -66,12 +66,12 @@ class TheCodeTrainHtmlValidatorTestCase_GetValidationErrorTest extends PHPUnit_F
     /**
      * @dataProvider TheCodeTrainHtmlValidatorProviders::invalidHtmlChunkWithOptionsProvider
      */
-    public function testReturnsStringWhenInvalidHtmlChunkWithOptionsTested($input) {
+    public function testReturnsArrayWhenInvalidHtmlChunkWithOptionsTested($input) {
         $errors = $this->obj->getValidationError(
             $input[0], 
             $input[1]
         );
-        $this->assertType('string', $errors);
+        $this->assertType('array', $errors);
     }
  
     /**
@@ -93,7 +93,7 @@ HTML;
     /**
      * @dataProvider TheCodeTrainHtmlValidatorProviders::invalidHtmlChunkProvider
      */
-    public function testReturnsStringWhenInvalidHtmlDocumentTested($input) {
+    public function testReturnsArrayWhenInvalidHtmlDocumentTested($input) {
         $html = <<< HTML
 <!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01//EN" "http://www.w3.org/TR/html4/strict.dtd">
 <html>
@@ -103,7 +103,7 @@ $input
 </body></html>
 HTML;
         $errors = $this->obj->getValidationError($html, array('document_section'=>TheCodeTrainHtmlValidator::HTML_DOCUMENT));
-        $this->assertType('string', $errors);
+        $this->assertType('array', $errors);
     }
 }
 ?>
