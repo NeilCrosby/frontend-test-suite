@@ -35,15 +35,19 @@ class TheCodeTrainHtmlValidator extends TheCodeTrainBaseValidator {
         $section  = isset($aOptions['document_section']) ? $aOptions['document_section'] : null;
         $position = isset($aOptions['document_section_position']) ? $aOptions['document_section_position'] : TheCodeTrainHtmlValidator::POSITION_BODY;
 
-        if ( self::FILE_IDENTIFIER == mb_substr( $html, 0, mb_strlen(self::FILE_IDENTIFIER)) ) {
-            // load from file instead of just using the given string
-            $file = mb_substr( $html, mb_strlen(self::FILE_IDENTIFIER));
-            $html = file_get_contents($file);
-        }
+        if ( self::HTTP_IDENTIFIER == mb_substr( $html, 0, mb_strlen(self::HTTP_IDENTIFIER)) ) {
+            $validationUrl = $this->validationUrl."?output=soap12&uri=".urlencode($html);
+            $postArray = null;
+        } else {
+            if ( self::FILE_IDENTIFIER == mb_substr( $html, 0, mb_strlen(self::FILE_IDENTIFIER)) ) {
+                // load from file instead of just using the given string
+                $file = mb_substr( $html, mb_strlen(self::FILE_IDENTIFIER));
+                $html = file_get_contents($file);
+            }
         
-        if ( TheCodeTrainHtmlValidator::HTML_CHUNK == $section ) {
-            if ( TheCodeTrainHtmlValidator::POSITION_HEAD == $position ) {
-                $html = <<< HTML
+            if ( TheCodeTrainHtmlValidator::HTML_CHUNK == $section ) {
+                if ( TheCodeTrainHtmlValidator::POSITION_HEAD == $position ) {
+                    $html = <<< HTML
 <!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01//EN" "http://www.w3.org/TR/html4/strict.dtd">
 <html>
 <head>
@@ -53,8 +57,8 @@ $html
 <p>Empty body</p>
 </body></html>
 HTML;
-            } else {
-                $html = <<< HTML
+                } else {
+                    $html = <<< HTML
 <!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01//EN" "http://www.w3.org/TR/html4/strict.dtd">
 <html>
 <head><title>title</title></head>
@@ -62,20 +66,25 @@ HTML;
 $html
 </body></html>
 HTML;
+                }
             }
-        }
         
-        if ( $doctypeOverride ) {
-            // we do this the same way that the actual W3C HTML Validator
-            // does it. If it's good enough for them, it's good enough for me.
-            $html = preg_replace("/^(<!DOCTYPE\s+[^>]*>)/", $doctypeOverride, $html);
+            if ( $doctypeOverride ) {
+                // we do this the same way that the actual W3C HTML Validator
+                // does it. If it's good enough for them, it's good enough for me.
+                $html = preg_replace("/^(<!DOCTYPE\s+[^>]*>)/", $doctypeOverride, $html);
+            }
+        
+            $validationUrl = $this->validationUrl;
+            $postArray = array('fragment' => $html,'output' => 'soap12');
+        
         }
         
         $result = $this->getCurlResponse(
-            $this->validationUrl,
-            array('post'=>array('fragment' => $html,'output' => 'soap12'))
+            $validationUrl,
+            array('post'=>$postArray)
         );
-
+        
         $this->lastResult = $result;
 
         if ( !$result ) {

@@ -12,6 +12,7 @@ abstract class TheCodeTrainBaseValidator {
     const NO_ERROR = false;
 
     const FILE_IDENTIFIER = 'file://';
+    const HTTP_IDENTIFIER = 'http://';
     
     protected $errorPointer = array('envBody', 'mmarkupvalidationresponse', 'mresult', 'merrors');
     
