@@ -50,6 +50,9 @@ class TheCodeTrainCssValidator extends TheCodeTrainBaseValidator {
             // load from file instead of just using the given string
             $file = mb_substr( $css, mb_strlen(self::FILE_IDENTIFIER));
             $css = file_get_contents($file);
+        } else if ( self::HTTP_IDENTIFIER == mb_substr( $css, 0, mb_strlen(self::HTTP_IDENTIFIER)) ) {
+            // load from http instead of just using the given string
+            $css = file_get_contents($css);
         }
         
         if ( isset($aOptions['exceptions']) && is_array($aOptions['exceptions']) ) {

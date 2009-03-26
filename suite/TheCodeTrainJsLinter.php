@@ -12,6 +12,7 @@ class TheCodeTrainJsLinter {
     const NO_ERROR = false;
 
     const FILE_IDENTIFIER = 'file://';
+    const HTTP_IDENTIFIER = 'http://';
     
     const OPTIONS_RECOMMENDED = 1;
     const OPTIONS_GOOD_PARTS  = 2;
@@ -71,6 +72,9 @@ class TheCodeTrainJsLinter {
             // load from file instead of just using the given string
             $file = mb_substr( $js, mb_strlen(self::FILE_IDENTIFIER));
             $js = file_get_contents($file);
+        } else if ( self::HTTP_IDENTIFIER == mb_substr( $js, 0, mb_strlen(self::HTTP_IDENTIFIER)) ) {
+            // load from http instead of just using the given string
+            $js = file_get_contents($js);
         }
         
         $file = '/tmp/tempjs.js';

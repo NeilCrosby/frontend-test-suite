@@ -80,7 +80,7 @@ abstract class TheCodeTrainBaseValidator {
             return array(array(
                 'line' => (string)$error->mline,
                 'errortype' => (string)$error->merrortype,
-                'error' => (string)$error->mmessage,
+                'error' => trim((string)$error->mmessage),
                 'original_line' => (string)$error->mcontext,
             ));
         }
@@ -90,7 +90,7 @@ abstract class TheCodeTrainBaseValidator {
             array_push($errors, array(
                 'line' => (string)$error->mline,
                 'errortype' => (string)$error->merrortype,
-                'error' => (string)$error->mmessage,
+                'error' => trim((string)$error->mmessage),
                 'original_line' => (string)$error->mcontext,
             ));
         }
