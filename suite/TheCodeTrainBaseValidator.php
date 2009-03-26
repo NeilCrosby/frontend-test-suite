@@ -77,21 +77,35 @@ abstract class TheCodeTrainBaseValidator {
         
         if ( 1 == $result->merrorcount ) {
             $error = $result->merrorlist->merror;
+            $orig = $error->mcontext;
+            if ( $error->msource ) {
+                $orig = $error->msource;
+                $orig = str_replace('<strong title="Position where error was detected.">', '', $orig);
+                $orig = str_replace('</strong>', '', $orig);
+                $orig = html_entity_decode($orig);
+            }
             return array(array(
                 'line' => (string)$error->mline,
                 'errortype' => (string)$error->merrortype,
                 'error' => trim((string)$error->mmessage),
-                'original_line' => (string)$error->mcontext,
+                'original_line' => (string)$orig,
             ));
         }
 
         $errors = array();
         foreach ($result->merrorlist->merror as $error) {
+            $orig = $error->mcontext;
+            if ( $error->msource ) {
+                $orig = $error->msource;
+                $orig = str_replace('<strong title="Position where error was detected.">', '', $orig);
+                $orig = str_replace('</strong>', '', $orig);
+                $orig = html_entity_decode($orig);
+            }
             array_push($errors, array(
                 'line' => (string)$error->mline,
                 'errortype' => (string)$error->merrortype,
                 'error' => trim((string)$error->mmessage),
-                'original_line' => (string)$error->mcontext,
+                'original_line' => (string)$orig,
             ));
         }
         
