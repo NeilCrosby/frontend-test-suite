@@ -1,3 +1,7 @@
+This is a fork of Neil's [Frontend Test Suite][fts].  Go there for the official, and most up-to-date version of this suite.
+
+[fts]: http://github.com/NeilCrosby/frontend-test-suite/tree
+
 # Frontend Test Suite
 
 Automated testing of Frontend Web Systems is a task that's rarely implemented, and when it is it's generally a just case of "Lets write some Selenium tests" and that will be the end of things.
