@@ -1,8 +1,10 @@
 <?php
 ini_set('display_errors', true);
 
-require_once('/Applications/MAMP/bin/php5/lib/php/PHPUnit/Framework/TestCase.php');
-require_once('/Applications/MAMP/bin/php5/lib/php/PHPUnit/TextUI/TestRunner.php');
+set_include_path( PHPLIB_ROOT . PATH_SEPARATOR . get_include_path() );
+
+require_once( 'PHPUnit/Framework/TestCase.php' );
+require_once( 'PHPUnit/TextUI/TestRunner.php' );
 
 if ( !function_exists('__autoload') ) {
     function __autoload($class) {
