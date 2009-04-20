@@ -1,4 +1,4 @@
-This is a fork of Neil's [Frontend Test Suite][fts].  Go there for the official, and most up-to-date version of this suite.
+The latest and most up to date version of the [Frontend Test Suite][fts] can be found on GitHub.  Go there for the official, and most up-to-date version of this suite.
 
 [fts]: http://github.com/NeilCrosby/frontend-test-suite/tree
 
