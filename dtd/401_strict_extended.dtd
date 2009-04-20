@@ -37,3 +37,23 @@ height      %Length;       #IMPLIED  -- frame height --
 width       %Length;       #IMPLIED  -- frame width --
 >
 
+<!--================== Add Target to Hyperlinks ==========================-->
+
+<!ATTLIST A
+  %attrs;                              -- %coreattrs, %i18n, %events --
+  charset     %Charset;      #IMPLIED  -- char encoding of linked resource --
+  type        %ContentType;  #IMPLIED  -- advisory content type --
+  name        CDATA          #IMPLIED  -- named link end --
+  href        %URI;          #IMPLIED  -- URI for linked resource --
+  hreflang    %LanguageCode; #IMPLIED  -- language code --
+  target      (top)          #IMPLIED  -- render in this frame --
+  rel         %LinkTypes;    #IMPLIED  -- forward link types --
+  rev         %LinkTypes;    #IMPLIED  -- reverse link types --
+  accesskey   %Character;    #IMPLIED  -- accessibility key character --
+  shape       %Shape;        rect      -- for use with client-side image maps --
+  coords      %Coords;       #IMPLIED  -- for use with client-side image maps --
+  tabindex    NUMBER         #IMPLIED  -- position in tabbing order --
+  onfocus     %Script;       #IMPLIED  -- the element got the focus --
+  onblur      %Script;       #IMPLIED  -- the element lost the focus --
+  >
+
