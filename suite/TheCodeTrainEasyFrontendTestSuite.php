@@ -1,8 +1,6 @@
 <?php
 ini_set('display_errors', true);
 
-set_include_path( PHPLIB_ROOT . PATH_SEPARATOR . get_include_path() );
-
 require_once( 'PHPUnit/Framework/TestCase.php' );
 require_once( 'PHPUnit/TextUI/TestRunner.php' );
 

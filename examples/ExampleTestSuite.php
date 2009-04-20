@@ -1,7 +1,6 @@
 <?php
   /* Run this example as: `phpunit ExampleTestSuite` */
   
-  define( 'PHPLIB_ROOT', '/Users/mikewest/lib/php/' );
   require_once( '../suite/TheCodeTrainEasyFrontendTestSuite.php' );
   
   class ExampleTestSuite extends TheCodeTrainEasyFrontendTestSuite {
