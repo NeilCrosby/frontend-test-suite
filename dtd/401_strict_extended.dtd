@@ -1,8 +1,11 @@
 <!--
     This is HTML 4.01 Strict Extended DTD.
     
-    This DTD is based off the HTML 4.01 Strict DTD, with allowances for
-    iframe elements and the start attribute on ordered lists.
+    This DTD is based off the HTML 4.01 Strict DTD, with allowances for:
+
+        * <iframe> elements
+        * start attribute on <ol> elements.
+        * target attribute with a value of "top" on <a> elements.
 -->
 
 <!ENTITY % special
