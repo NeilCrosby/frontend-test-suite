@@ -37,3 +37,33 @@ You will want to install the following because if you set up the Test Suite to k
         phpunit ExampleTestSuite
         
 6.  The suite should test yahoo.com and throw a load of errors relating to the page.  Hooray - you're in business!
+
+## Setting up Local Validators
+
+The following instructions all assume you're running these validators on a Mac.  If you're using something else, then may the gods be with you.  Seriously though, you should be able to get all these set up on any of the major systems without many problems.
+
+### HTML Validator
+
+Full instructions for setting up the W3C HTML Validator can be found at:
+
+    <http://validator.w3.org/docs/install.html>
+    
+### CSS Validator
+
+Full instructions for setting up the W3C CSS Validator on the Mac can be found at:
+
+    <http://thecodetrain.co.uk/2009/03/getting-the-css-validator-running-as-a-website/>
+    
+For all other systems, take a look at:
+
+    <http://jigsaw.w3.org/css-validator/DOWNLOAD.html>
+    
+### JSLint
+
+Full instructions for setting up JSLint on the Mac can be found at :
+
+    <http://www.phpied.com/jslint-on-mac-textmate/>
+    
+For all other systems, look at:
+
+    <http://www.jslint.com/lint.html>
