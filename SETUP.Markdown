@@ -46,24 +46,24 @@ The following instructions all assume you're running these validators on a Mac. 
 
 Full instructions for setting up the W3C HTML Validator can be found at:
 
-    <http://validator.w3.org/docs/install.html>
+    http://validator.w3.org/docs/install.html
     
 ### CSS Validator
 
 Full instructions for setting up the W3C CSS Validator on the Mac can be found at:
 
-    <http://thecodetrain.co.uk/2009/03/getting-the-css-validator-running-as-a-website/>
+    http://thecodetrain.co.uk/2009/03/getting-the-css-validator-running-as-a-website/
     
 For all other systems, take a look at:
 
-    <http://jigsaw.w3.org/css-validator/DOWNLOAD.html>
+    http://jigsaw.w3.org/css-validator/DOWNLOAD.html
     
 ### JSLint
 
 Full instructions for setting up JSLint on the Mac can be found at :
 
-    <http://www.phpied.com/jslint-on-mac-textmate/>
+    http://www.phpied.com/jslint-on-mac-textmate/
     
 For all other systems, look at:
 
-    <http://www.jslint.com/lint.html>
+    http://www.jslint.com/lint.html
