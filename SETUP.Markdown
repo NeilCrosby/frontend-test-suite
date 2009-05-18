@@ -18,22 +18,22 @@ You will want to install the following because if you set up the Test Suite to k
 
 ## Setting up the Test Suite
 
-    1.  Make sure you've got PHP installed, and it's available from the commandline.  If you haven't got it installed yet, go to <http://www.php.net/downloads.php> and install it.
+1.  Make sure you've got PHP installed, and it's available from the commandline.  If you haven't got it installed yet, go to <http://www.php.net/downloads.php> and install it.
     
-    2.  PEAR should have been installed when you installed PHP, and should be available by running `pear` on the commandline. If not, you will need to get it from <http://pear.php.net/PEAR>
+2.  PEAR should have been installed when you installed PHP, and should be available by running `pear` on the commandline. If not, you will need to get it from <http://pear.php.net/PEAR>
     
-    3.  To install PHPUnit, do the following on the commandline:
-    
-            pear channel-discover pear.phpunit.de
-            pear install phpunit/PHPUnit
-            
-    4.  To install the Frontend Test Suite, download it from <http://github.com/NeilCrosby/frontend-test-suite/tree/master> or pull it down to your server using git:
-    
-            git clone git://github.com/NeilCrosby/frontend-test-suite.git 
-            
-    5.  To test the test suite works, do the following:
-    
-            cd frontend-test-suite/examples
-            phpunit ExampleTestSuite
-            
-    6.  The suite should test yahoo.com and throw a load of errors relating to the page.  Hooray - you're in business!
+3.  To install PHPUnit, do the following on the commandline:
+
+        pear channel-discover pear.phpunit.de
+        pear install phpunit/PHPUnit
+        
+4.  To install the Frontend Test Suite, download it from <http://github.com/NeilCrosby/frontend-test-suite/tree/master> or pull it down to your server using git:
+
+        git clone git://github.com/NeilCrosby/frontend-test-suite.git 
+        
+5.  To test the test suite works, do the following:
+
+        cd frontend-test-suite/examples
+        phpunit ExampleTestSuite
+        
+6.  The suite should test yahoo.com and throw a load of errors relating to the page.  Hooray - you're in business!
