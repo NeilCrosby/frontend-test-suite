@@ -72,6 +72,14 @@ HTML;
             if ( $doctypeOverride ) {
                 // we do this the same way that the actual W3C HTML Validator
                 // does it. If it's good enough for them, it's good enough for me.
+                ########
+                # But why don't we use the doctype url parameter?
+                ########
+                # See the validator/cgi-bin/check override_doctype subroutine.
+                # This subroutine looks for the requested doctype in its
+                # library of DTD files and only accepts it as an override if
+                # it already knows about it.  By doing the replace as a simple
+                # string replace we can override with any doctype.
                 $html = preg_replace("/^(<!DOCTYPE\s+[^>]*>)/", $doctypeOverride, $html);
             }
         
