@@ -6,8 +6,9 @@
  *          http://creativecommons.org/licenses/by-sa/3.0/
  **/
 class TheCodeTrainHtmlValidatorProviders {
-    
-    const DTD_401_STRICT_EXTENDED = '<!DOCTYPE HTML SYSTEM "http://dtd:8888/401_strict_extended.dtd">';
+    const DEFAULT_ASSETS_BASE_URL = 'http://htmlvalidator/check';
+    const DEFAULT_VALIDATOR_URL = 'http://dtd:8888/';
+    const DTD_401_STRICT_EXTENDED = '<!DOCTYPE HTML SYSTEM "{assets-base-url}/dtd/401_strict_extended.dtd">';
     
     public static function fileProvider($path) {
         $return = array();
@@ -99,8 +100,12 @@ class TheCodeTrainHtmlValidatorProviders {
     }
 
     public static function validValidatorUrlProvider() {
+        $validator_url = getenv( 'FETS_TEST_HTML_VALIDATOR_URL' );
+        if ( empty( $validator_url ) ) {
+            $validator_url = self::DEFAULT_VALIDATOR_URL;
+        }
         return array(
-            array('http://htmlvalidator/check'),
+            array( $validator_url )
         );
     }
     
@@ -110,6 +115,42 @@ class TheCodeTrainHtmlValidatorProviders {
         );
     }
     
+    public static function validHtmlWithDoctypeOverrideProvider() {
+        $assets_base_url = getenv( 'FETS_TEST_ASSETS_BASE_URL' );
+        if ( empty( $assets_base_url ) ) {
+            $assets_base_url = self::DEFAULT_ASSETS_BASE_URL;
+        }
+        
+        $doctype = strtr( self::DTD_401_STRICT_EXTENDED, array(
+            '{assets-base-url}' => $assets_base_url 
+        ) );
+        
+        return array(
+            // External file
+            array( 
+                $assets_base_url . '/html/invalid/valid-401-strict-extended.html',
+                array(
+                    'doctype_override' => $doctype
+                )
+            ),
+            // Local file
+            array(
+                'file://' . dirname( __FILE__ ) . '/assets/html/invalid/valid-401-strict-extended.html',
+                array(
+                    'doctype_override' => $doctype
+                )
+            ),
+            // HTML Chunk
+            array(
+                '<ol start="5"><li>foo</li></ol>',
+                array(
+                    'doctype_override' => $doctype,
+                    'document_section' => TheCodeTrainHtmlValidator::HTML_CHUNK,
+                    'document_section_position' => TheCodeTrainHtmlValidator::POSITION_BODY
+                )
+            )
+        );
+    }
 }
 
 ?>

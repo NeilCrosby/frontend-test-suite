@@ -35,11 +35,13 @@ class TheCodeTrainHtmlValidator extends TheCodeTrainBaseValidator {
         $section  = isset($aOptions['document_section']) ? $aOptions['document_section'] : null;
         $position = isset($aOptions['document_section_position']) ? $aOptions['document_section_position'] : TheCodeTrainHtmlValidator::POSITION_BODY;
 
-        if ( self::HTTP_IDENTIFIER == mb_substr( $html, 0, mb_strlen(self::HTTP_IDENTIFIER)) ) {
+        if ( self::HTTP_IDENTIFIER == mb_substr( $html, 0, mb_strlen( self::HTTP_IDENTIFIER ) ) && is_null( $doctypeOverride ) ) {
             $validationUrl = $this->validationUrl."?output=soap12&uri=".urlencode($html);
             $postArray = null;
         } else {
-            if ( self::FILE_IDENTIFIER == mb_substr( $html, 0, mb_strlen(self::FILE_IDENTIFIER)) ) {
+            if ( self::HTTP_IDENTIFIER == mb_substr( $html, 0, mb_strlen( self::HTTP_IDENTIFIER ) ) ) {
+                $html = $this->getCurlResponse( $html );
+            } else if ( self::FILE_IDENTIFIER == mb_substr( $html, 0, mb_strlen(self::FILE_IDENTIFIER)) ) {
                 // load from file instead of just using the given string
                 $file = mb_substr( $html, mb_strlen(self::FILE_IDENTIFIER));
                 $html = file_get_contents($file);
@@ -77,7 +79,6 @@ HTML;
         
             $validationUrl = $this->validationUrl;
             $postArray = array('fragment' => $html,'output' => 'soap12');
-        
         }
         
         $result = $this->getCurlResponse(
