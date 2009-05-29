@@ -6,9 +6,17 @@
  *          http://creativecommons.org/licenses/by-sa/3.0/
  **/
 class TheCodeTrainHtmlValidatorTestCase_GetValidationErrorTest extends PHPUnit_Framework_TestCase {
+    
+    const DEFAULT_VALIDATOR_URL="http://htmlvalidator/check"; // TODO proper URL
+    
     public function setUp() {
+        $validator_url = getenv( 'FETS_TEST_HTML_VALIDATOR_URL' );
+        if ( empty( $validator_url ) ) {
+            $validator_url = self::DEFAULT_VALIDATOR_URL;
+        }
+
         $this->obj = new ConcreteValidatorTestCase();
-        $this->obj->setValidatorUrl('http://htmlvalidator/check');
+        $this->obj->setValidatorUrl( $validator_url );
     }
 
     public function tearDown() {
@@ -104,6 +112,14 @@ $input
 HTML;
         $errors = $this->obj->getValidationError($html, array('document_section'=>TheCodeTrainHtmlValidator::HTML_DOCUMENT));
         $this->assertType('array', $errors);
+    }
+
+    /**
+     * @dataProvider TheCodeTrainHtmlValidatorProviders::validHtmlWithDoctypeOverrideProvider
+     */
+    public function testReturnsFalseWhenGivenValidHtmlDoctypeOverride( $html, $aOptions ) {
+        $errors = $this->obj->getValidationError( $html, $aOptions );
+        $this->assertFalse($errors);
     }
 }
 ?>
