@@ -7,14 +7,9 @@
  **/
 class TheCodeTrainHtmlValidator_IsValidTest extends PHPUnit_Framework_TestCase {
 
-    const DEFAULT_VALIDATOR_URL="http://htmlvalidator/check"; // TODO proper URL
-
     public function setUp() {
-        $validator_url = getenv( 'FETS_TEST_HTML_VALIDATOR_URL' );
-        if ( empty( $validator_url ) ) {
-            $validator_url = self::DEFAULT_VALIDATOR_URL;
-        }
-        $this->obj = new TheCodeTrainHtmlValidator( $validator_url );
+        $urls = TheCodeTrainHtmlValidatorProviders::validValidatorUrlProvider();
+        $this->obj = new TheCodeTrainHtmlValidator( $urls[0][0] );
     }
 
     public function tearDown() {
