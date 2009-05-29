@@ -6,6 +6,7 @@
  *          http://creativecommons.org/licenses/by-sa/3.0/
  **/
 class TheCodeTrainJsLinterProviders {
+    const DEFAULT_LINT_COMMAND = "java org.mozilla.javascript.tools.shell.Main ~/Library/JSLint/jslint.js";
     
     public static function validJsProvider() {
         return array(
@@ -43,8 +44,12 @@ class TheCodeTrainJsLinterProviders {
     }
     
     public static function validLintCommandProvider() {
+        $lint_command = getenv( 'FETS_TEST_JS_LINT_COMMAND' );
+        if ( empty( $lint_command ) ) {
+            $lint_command = self::DEFAULT_LINT_COMMAND;
+        }
         return array(
-            array('java org.mozilla.javascript.tools.shell.Main ~/Library/JSLint/jslint.js'),
+            array( $lint_command ),
         );
     }
     

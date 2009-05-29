@@ -7,8 +7,9 @@
  **/
 class TheCodeTrainJsLinterTestCase_GetLintErrorsTest extends PHPUnit_Framework_TestCase {
     public function setUp() {
+        $commands = TheCodeTrainJsLinterProviders::validLintCommandProvider();
         $this->obj = new ConcreteJsLinterTestCase();
-        $this->obj->setLintCommand('java org.mozilla.javascript.tools.shell.Main ~/Library/JSLint/jslint.js');
+        $this->obj->setLintCommand( $commands[0][0] );
     }
 
     public function tearDown() {
