@@ -38,6 +38,15 @@ class TheCodeTrainHtmlValidatorProviders {
     }
 
     public static function validHtmlChunkWithOptionsProvider() {
+        $assets_base_url = getenv( 'FETS_TEST_ASSETS_BASE_URL' );
+        if ( empty( $assets_base_url ) ) {
+            $assets_base_url = self::DEFAULT_ASSETS_BASE_URL;
+        }
+        
+        $doctype = strtr( self::DTD_401_STRICT_EXTENDED, array(
+            '{assets-base-url}' => $assets_base_url 
+        ) );
+        
         return array(
             array(array('<p>Some text</p>', array(
                 'document_section'=>TheCodeTrainHtmlValidator::HTML_CHUNK, 
@@ -49,11 +58,11 @@ class TheCodeTrainHtmlValidatorProviders {
             ))),
             array(array('<div><iframe src="fishy.html"></iframe></div>', array(
                 'document_section'=>TheCodeTrainHtmlValidator::HTML_CHUNK,
-                'doctype_override'=>self::DTD_401_STRICT_EXTENDED,
+                'doctype_override'=>$doctype,
             ))),
             array(array('<ol start="5"><li>list item</li></ol>', array(
                 'document_section'=>TheCodeTrainHtmlValidator::HTML_CHUNK,
-                'doctype_override'=>self::DTD_401_STRICT_EXTENDED,
+                'doctype_override'=>$doctype,
             ))),
         );
     }
