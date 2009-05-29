@@ -8,7 +8,8 @@
 class TheCodeTrainCssValidatorTestCase_GetValidationErrorTest extends PHPUnit_Framework_TestCase {
     public function setUp() {
         $this->obj = new ConcreteCssValidatorTestCase();
-        $this->obj->setValidatorUrl('http://127.0.0.1:8080/css-validator/validator');
+        $urls = TheCodeTrainCssValidatorProviders::validValidatorUrlProvider();
+        $this->obj->setValidatorUrl( $urls[0][0] );
     }
 
     public function tearDown() {

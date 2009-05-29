@@ -8,7 +8,7 @@
 class TheCodeTrainCssValidator_IsValidTest extends PHPUnit_Framework_TestCase {
     public function setUp() {
         $urls = TheCodeTrainCssValidatorProviders::validValidatorUrlProvider();
-        $this->obj = new TheCodeTrainCssValidator($urls[0][0]); // TODO proper URL
+        $this->obj = new TheCodeTrainCssValidator($urls[0][0]);
     }
 
     public function tearDown() {

@@ -7,6 +7,9 @@
  **/
 class TheCodeTrainCssValidatorProviders {
     
+    //const DEFAULT_VALIDATOR_URL = "http://jigsaw.w3.org/css-validator/validator";
+    const DEFAULT_VALIDATOR_URL = "http://127.0.0.1:8080/css-validator/validator";
+    
     public static function validCssProvider() {
         return array(
             array('p {display: block;}'),
@@ -56,9 +59,12 @@ class TheCodeTrainCssValidatorProviders {
     }
     
     public static function validValidatorUrlProvider() {
+        $validator_url = getenv( 'FETS_TEST_CSS_VALIDATOR_URL' );
+        if ( empty( $validator_url ) ) {
+            $validator_url = self::DEFAULT_VALIDATOR_URL;
+        }
         return array(
-            //array('http://jigsaw.w3.org/css-validator/validator'),
-            array('http://127.0.0.1:8080/css-validator/validator'),
+            array( $validator_url )
         );
     }
     
