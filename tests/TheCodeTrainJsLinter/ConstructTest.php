@@ -15,7 +15,7 @@ class TheCodeTrainJsLinter_ConstructTest extends PHPUnit_Framework_TestCase {
     /**
      * @dataProvider lintCommandProvider
      */
-    public function testInstantiatesIfValidationUrlGiven( $input ) {
+    public function testInstantiatesIfValidLintCommandGiven( $input ) {
         $obj = new TheCodeTrainJsLinter($input);
         $this->assertThat(
             $obj,

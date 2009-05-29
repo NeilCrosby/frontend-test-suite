@@ -27,6 +27,9 @@ class TheCodeTrainJsLinter_GetErrorsTest extends PHPUnit_Framework_TestCase {
     public function testReturnsFalseWhenValidJsTested($input) {
         $isValid = $this->obj->isValid($input);
         $errors = $this->obj->getErrors();
+        if ( TheCodeTrainJsLinter::NO_LINTER_RESPONSE === $isValid ) {
+            $this->markTestSkipped();
+        }
         $this->assertFalse($errors);
     }
 
@@ -36,6 +39,9 @@ class TheCodeTrainJsLinter_GetErrorsTest extends PHPUnit_Framework_TestCase {
     public function testReturnsArrayWhenInvalidHsTested($input) {
         $isValid = $this->obj->isValid($input);
         $errors = $this->obj->getErrors();
+        if ( TheCodeTrainJsLinter::NO_LINTER_RESPONSE === $isValid ) {
+            $this->markTestSkipped();
+        }
         $this->assertType('array', $errors);
     }
 

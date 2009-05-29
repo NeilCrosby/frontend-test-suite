@@ -77,16 +77,42 @@ class TheCodeTrainJsLinter {
             $js = file_get_contents($js);
         }
         
-        $file = '/tmp/tempjs.js';
-        
         // save the JS (along with extra jslint options) to a temporary file
+        $file = tempnam( "/tmp", "jslint-" );
         file_put_contents($file, $extraRules."\n".$js);
 
-        // now actually run the linting command
-        $output = exec($this->lintCommand.' '.$file, $result);
-        
+        // Build lint command to output stderr to OS variant of /dev/null to suppress Java/Rhino error messages.
+        $lintCommand = $this->lintCommand . ' ' . $file;
+        if ( PHP_OS == 'WINNT' || PHP_OS == 'WIN32' || PHP_OS == 'Windows' ) {
+            $lintCommand .= ' 2>nul';
+        } else {
+            $lintCommand .= ' 2>/dev/null';
+        }
+
+        // now actually run the linting command, capturing the exit code
+        $exitCode = 0;
+        $output = exec( $lintCommand, $result, $exitCode );
+
+        // TODO: throw exceptions or provide error feedback under the error conditions
+        // exit codes       output      meaning
+        // -------------------------------------
+        //  0               -           no linting errors
+        //  1               empty       error launching Rhino
+        //  1               not empty   jslint could not find temp file
+        //  2               not empty   jslint found lintint errors
+        //  3               -           ???
+        //  4               empty       Rhino couldn't find jslint.js
+
+        unlink( $file );
+
         $this->lastResult = $result;
-        return (count($result) < self::LINES_PER_ERROR) ? true : false;
+        
+        // Return no response if we got anything but linting success or failure from linting command
+        if ( $exitCode != 0 && $exitCode != 2 ) {
+            return self::NO_LINTER_RESPONSE;
+        }
+        
+        return $exitCode == 0;
     }
     
 }

@@ -53,6 +53,17 @@ class TheCodeTrainJsLinterProviders {
         );
     }
     
+    public static function invalidLintCommandProvider() {
+        return array(
+            // Totally mangled lint command
+            array( "java or.molla.jaaript.tos.she.Man ~/Libry/JSLt/jsli.js" ),
+            // Missing JSLint
+            array( "java org.mozilla.javascript.tools.shell.Main ~/Library/JSLint/this-jslint-does-not-exist.js" ),
+            // Missing Rhino
+            array( "java nonexistant.java.class.for.rhino.Main ~/Library/JSLint/this-jslint-does-not-exist.js" ),            
+        );
+    }
+    
 }
 
 ?>
