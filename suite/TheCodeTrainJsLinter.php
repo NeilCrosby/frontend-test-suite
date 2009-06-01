@@ -1,6 +1,12 @@
 <?php
 
 /**
+ * Requires JSLint >= The version available from jslint.com[1] on Monday 1st
+ * June 2009.  It would be helpful if the JSLint file contained version
+ * information.
+ *
+ * [1]: http://jslint.com/rhino/jslint.js
+ * 
  * @author  Neil Crosby <neil@neilcrosby.com>
  * @license Creative Commons Attribution-Share Alike 3.0 Unported 
  *          http://creativecommons.org/licenses/by-sa/3.0/
