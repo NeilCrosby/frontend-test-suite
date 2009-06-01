@@ -7,7 +7,7 @@
  **/
 class TheCodeTrainHtmlValidatorProviders {
     const DEFAULT_VALIDATOR_URL = 'http://htmlvalidator/check';
-    const DEFAULT_ASSETS_BASE_URL = 'http://dtd:8888/';
+    const DEFAULT_ASSETS_BASE_URL = 'http://dtd:8888';
     const DTD_401_STRICT_EXTENDED = '<!DOCTYPE HTML SYSTEM "{assets-base-url}/dtd/401_strict_extended.dtd">';
     
     public static function fileProvider($path) {
