@@ -6,8 +6,15 @@
  *          http://creativecommons.org/licenses/by-sa/3.0/
  **/
 class TheCodeTrainHtmlValidator_IsValidTest extends PHPUnit_Framework_TestCase {
+
+    const DEFAULT_VALIDATOR_URL="http://htmlvalidator/check"; // TODO proper URL
+
     public function setUp() {
-        $this->obj = new TheCodeTrainHtmlValidator('http://htmlvalidator/check'); // TODO proper URL
+        $validator_url = getenv( 'FETS_TEST_HTML_VALIDATOR_URL' );
+        if ( empty( $validator_url ) ) {
+            $validator_url = self::DEFAULT_VALIDATOR_URL;
+        }
+        $this->obj = new TheCodeTrainHtmlValidator( $validator_url );
     }
 
     public function tearDown() {
@@ -67,6 +74,16 @@ class TheCodeTrainHtmlValidator_IsValidTest extends PHPUnit_Framework_TestCase {
         }
         $this->assertFalse($isValid);
     }
-    
+
+    /**
+     * @dataProvider TheCodeTrainHtmlValidatorProviders::validHtmlWithDoctypeOverrideProvider
+     */
+    public function testReturnsTrueWhenGivenValidHtmlDoctypeOverride( $html, $aOptions ) {
+        $isValid = $this->obj->isValid( $html, $aOptions );
+        if ( TheCodeTrainHtmlValidator::NO_VALIDATOR_RESPONSE === $isValid ) {
+            $this->markTestSkipped();
+        }
+        $this->assertTrue( $isValid );
+    }
 }
 ?>
