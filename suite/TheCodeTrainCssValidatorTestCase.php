@@ -10,8 +10,8 @@
  **/
 abstract class TheCodeTrainCssValidatorTestCase extends TheCodeTrainBaseValidatorTestCase {
     
-    protected $validatorUrl = 'http://127.0.0.1:8080/css-validator/validator';
+    protected $validatorUrl   = 'http://jigsaw.w3.org/css-validator/validator';
     protected $validatorClass = 'TheCodeTrainCssValidator';
-
+    
 }
 ?>

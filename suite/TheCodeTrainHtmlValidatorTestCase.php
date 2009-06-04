@@ -10,8 +10,8 @@
  **/
 abstract class TheCodeTrainHtmlValidatorTestCase extends TheCodeTrainBaseValidatorTestCase {
     
-    protected $validatorUrl = 'http://htmlvalidator/check';
+    protected $validatorUrl   = 'http://validator.w3.org/check';
     protected $validatorClass = 'TheCodeTrainHtmlValidator';
-    
+            
 }
 ?>

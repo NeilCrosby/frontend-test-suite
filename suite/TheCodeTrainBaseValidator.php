@@ -39,6 +39,16 @@ abstract class TheCodeTrainBaseValidator {
             curl_setopt( $session, CURLOPT_POST, 1 );
             curl_setopt( $session, CURLOPT_POSTFIELDS, $aOptions['post'] );
         }
+        
+        $w3c_web_services = array(
+            'http://validator.w3.org/check',
+            'http://jigsaw.w3.org/css-validator/validator'
+        );
+        
+        if ( in_array( $url, $w3c_web_services ) ) {
+            error_log( "\nUsing W3C web service ${url} so waiting for 2 seconds. Consider specifying a non-W3C installation of the web service.\n" );
+            sleep( 2 );
+        }
 
         $result = curl_exec( $session );
 

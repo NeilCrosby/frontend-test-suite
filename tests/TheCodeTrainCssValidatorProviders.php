@@ -7,8 +7,7 @@
  **/
 class TheCodeTrainCssValidatorProviders {
     
-    //const DEFAULT_VALIDATOR_URL = "http://jigsaw.w3.org/css-validator/validator";
-    const DEFAULT_VALIDATOR_URL = "http://127.0.0.1:8080/css-validator/validator";
+    const DEFAULT_VALIDATOR_URL = "http://jigsaw.w3.org/css-validator/validator";
     
     public static function validCssProvider() {
         return array(
