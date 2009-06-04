@@ -30,7 +30,7 @@ class TheCodeTrainJsLinter_ConstructTest extends PHPUnit_Framework_TestCase {
 
     public static function lintCommandProvider() {
         return array(
-            array('java org.mozilla.javascript.tools.shell.Main ~/Library/JSLint/jslint.js'),
+            array( TheCodeTrainJsLinterProviders::validLintCommandProvider() )
         );
     }
 
