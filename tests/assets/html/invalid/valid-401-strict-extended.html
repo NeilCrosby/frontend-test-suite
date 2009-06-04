@@ -3,10 +3,23 @@
 <html lang='en'>
     <head>
         <title>Valid HTML 4.01 Strict</title>
+        <base href="http://example.com" target="_top">
     </head>
     <body>
+        
         <ol start="5">
             <li>This is valid 4.01 Strict extended (not 4.01 Strict)</li>
         </ol>
+        
+        <form action="http://example.com" target="_top">
+            <div></div>
+        </form>
+        
+        <p><a href="http://example.com" target="_top">Example</a></p>
+        
+        <div>
+            <iframe src="http://example.com"></iframe>
+        </div>
+        
     </body>
 </html>
