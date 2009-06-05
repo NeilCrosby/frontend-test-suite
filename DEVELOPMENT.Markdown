@@ -7,7 +7,7 @@ This document contains details for developers who are adding to or modifying the
 
 ## Running the tests
 
-As you'd expect, the Front-End Test Suite comes with a complete set of unit tests that exercise the Front-End Test Suite code. To run these tests, =cd= to the directory where your copy of the Front-End Test Suite lives and run the following command.
+As you'd expect, the Front-End Test Suite comes with a complete set of unit tests that exercise the Front-End Test Suite code. To run these tests, `cd` to the directory where your copy of the Front-End Test Suite lives and run the following command.
 
     phpunit tests
 
