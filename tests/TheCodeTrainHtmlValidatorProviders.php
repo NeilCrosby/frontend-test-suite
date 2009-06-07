@@ -7,7 +7,7 @@
  **/
 class TheCodeTrainHtmlValidatorProviders {
     const DEFAULT_VALIDATOR_URL   = 'http://validator.w3.org/check';
-    const DEFAULT_ASSETS_BASE_URL = 'http://example.com/frontend-test-suite';
+    const DEFAULT_ASSETS_BASE_URL = 'http://neilcrosby.github.com/frontend-test-suite';
     const DTD_401_STRICT_EXTENDED = '<!DOCTYPE HTML SYSTEM "{assets-base-url}/dtd/401_strict_extended.dtd">';
     
     public static function fileProvider($path) {
@@ -137,7 +137,7 @@ class TheCodeTrainHtmlValidatorProviders {
         return array(
             // External file
             array( 
-                $assets_base_url . '/html/invalid/valid-401-strict-extended.html',
+                $assets_base_url . '/tests/assets/html/invalid/valid-401-strict-extended.html',
                 array(
                     'doctype_override' => $doctype
                 )

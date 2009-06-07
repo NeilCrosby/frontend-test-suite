@@ -159,7 +159,7 @@ class TheCodeTrainEasyFrontendTestSuiteJsLinterTestCase extends TheCodeTrainJsLi
 #                array('http://wordpress:8888/'),
 #                array('http://htmlvalidator/'),
 #                array('file://../tests/assets/html/invalid/valid-401-strict-extended.html', array(
-#                    'doctype_override' => '<!DOCTYPE HTML SYSTEM "http://dtd:8888/401_strict_extended.dtd">'
+#                    'doctype_override' => '<!DOCTYPE HTML SYSTEM "http://neilcrosby.github.com/frontend-test-suite/dtd/401_strict_extended.dtd">'
 #                )),
 #                array('<p>Why hello there</p>', array(
 #                    'document_section' => TheCodeTrainHtmlValidator::HTML_CHUNK
