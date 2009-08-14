@@ -25,6 +25,11 @@ abstract class TheCodeTrainBaseValidatorTestCase extends PHPUnit_Framework_TestC
         }
         
         $result = $validator->getErrors();
+        
+        if (isset($_SERVER['argv']) && in_array('--log-json', $_SERVER['argv'])) {
+            $result = json_encode($result);
+        }
+        
         return $result;
     }
 
